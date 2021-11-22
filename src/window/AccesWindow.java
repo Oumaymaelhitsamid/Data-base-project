@@ -6,7 +6,9 @@ import java.awt.event.*;
 public class AccesWindow {
 
     public static void main(String[] args) {
-        final JFrame frame = new JFrame("JPasswogggggrdField Demo");
+
+        final JFrame frame = new JFrame("JPasswordField Demo");
+
 
         JLabel lblUser = new JLabel("User Name:");
         JTextField tfUser = new JTextField(20);
