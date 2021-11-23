@@ -5,9 +5,12 @@ import java.awt.event.*;
 
 public class AccesWindow {
 
-    public static void main(String[] args) {
 
-        final JFrame frame = new JFrame("JPasswordField Demo");
+
+	private String passwd;
+
+	public AccesWindow() {
+        final JFrame frame = new JFrame("Bienvenu");
 
 
         JLabel lblUser = new JLabel("User Name:");
@@ -28,8 +31,28 @@ public class AccesWindow {
                                 "Password is " + password);
                     }
                 });
+        
+        this.passwd = new String(pfPassword.getPassword());
+        System.out.println(passwd);
 
         JButton btnLogin = new JButton("Login");
+        btnLogin.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        String password = new String(pfPassword.getPassword());
+                        if (passwd == "p") {
+                        	JOptionPane.showMessageDialog(frame,
+                                    "Password is " + password);
+                        }
+                        else {
+                        	System.out.println(passwd);
+                        	JOptionPane.showMessageDialog(frame,
+                                    "Wrong password ");
+                        	frame.dispose();
+                        }
+                    }
+                });
 
         JPanel panel = new JPanel();
         panel.setLayout(new SpringLayout());
@@ -46,11 +69,19 @@ public class AccesWindow {
                 6, 6, //initX, initY
                 6, 6); //xPad, yPad
 	
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(300, 120);
         frame.getContentPane().add(panel);
         frame.setVisible(true);
-        
-       
-    }
+        frame.setLocationRelativeTo(null);
+	 }
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	 
+	 
+
+      
 }
