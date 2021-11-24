@@ -6,8 +6,8 @@ import java.util.Calendar;
 public class CreateTable {
     // Pour se connecter à la base de données :
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "trouchda";
-    static final String PASSWD = "trouchda";
+    static final String USER = "arvyp";
+    static final String PASSWD = "arvyp";
 
     // Assure que les tables n'existes pas:
     static final String DROP_PRODUITS = "DROP TABLE PRODUITS";
@@ -33,11 +33,11 @@ public class CreateTable {
             "idUtilisateur INT NOT NULL, PRIMARY KEY(dateOffre, heureOffre))";
     static final String CREATE_UTILISATEURS = "CREATE TABLE UTILISATEURS(idUtilisateur INT PRIMARY KEY)";
     static final String CREATE_COMPTES = "CREATE TABLE COMPTES(idUtilisateur INT PRIMARY KEY," +
-            "email char(40) NOT NULL," +
-            "mdp char(20) CHECK(length(mdp)>7)," +
-            "nom char(20) NOT NULL," +
-            "prenom char(20) NOT NULL," +
-            "adresse char(100) NOT NULL)";
+            "email varchar(40) NOT NULL," +
+            "mdp varchar(20) CHECK(length(mdp)>7)," +
+            "nom varchar(20) NOT NULL," +
+            "prenom varchar(20) NOT NULL," +
+            "adresse varchar(100) NOT NULL)";
     static final String CREATE_CARACTERISTIQUES = "CREATE TABLE CARACTERISTIQUES(idProduit int," +
             "caracteristique VARCHAR(20)," +
             "valeurCarac char(20) NOT NULL, PRIMARY KEY(caracteristique))";
