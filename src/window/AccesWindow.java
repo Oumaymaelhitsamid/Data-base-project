@@ -110,12 +110,17 @@ public class AccesWindow extends JFrame{
                     conn.setAutoCommit(false);
                     System.out.println("connected");
 
-                    PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT mdp FROM COMPTES WHERE email = ?");
+                    PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT mdp, nom, prenom FROM COMPTES WHERE email = ?");
                     stmt_interrogation.setString(1, userName);
                     ResultSet rset = stmt_interrogation.executeQuery();
                     conn.commit();
                     if (rset.next() && rset.getString(1).equals(password)){
-                        // new Window();
+                        try {
+                            MainWindow mainFrame = new MainWindow(rset.getString(3) ,rset.getString(2));
+                            mainFrame.setVisible(true);
+                        } catch (Exception er) {
+                            er.printStackTrace();
+                        }
                         System.out.println("Login Successfully");
                     } else {
                         System.out.println("Login Failed, the email and password don't match");
