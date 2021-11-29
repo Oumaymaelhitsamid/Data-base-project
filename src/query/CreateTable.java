@@ -30,7 +30,7 @@ public class CreateTable {
             "dateOffre VARCHAR(8)," +
             "heureOffre VARCHAR(6)," +
             "prixPropose FLOAT CHECK (prixPropose>0)," +
-            "idUtilisateur INT NOT NULL, PRIMARY KEY(dateOffre, heureOffre))";
+            "idUtilisateur INT NOT NULL, PRIMARY KEY(idProduit, dateOffre, heureOffre))";
     static final String CREATE_UTILISATEURS = "CREATE TABLE UTILISATEURS(idUtilisateur INT PRIMARY KEY)";
     static final String CREATE_COMPTES = "CREATE TABLE COMPTES(idUtilisateur INT PRIMARY KEY," +
             "email varchar(40) NOT NULL," +
@@ -39,8 +39,8 @@ public class CreateTable {
             "prenom varchar(20) NOT NULL," +
             "adresse varchar(100) NOT NULL)";
     static final String CREATE_CARACTERISTIQUES = "CREATE TABLE CARACTERISTIQUES(idProduit int," +
-            "caracteristique VARCHAR(20)," +
-            "valeurCarac char(20) NOT NULL, PRIMARY KEY(caracteristique))";
+            "caracteristique VARCHAR(20) NOT NULL," +
+            "valeurCarac VARCHAR(20) NOT NULL, PRIMARY KEY(idProduit, caracteristique))";
 
     // Pour les lisaisons type 0..1 :
     static final String CREATE_APOURMERE = "CREATE TABLE aPourMere(nomCategorieFille char(30) PRIMARY KEY," +

@@ -27,7 +27,8 @@ public class InsertTuples {
             "INSERT INTO COMPTES VALUES ('3', 'ottograf@grenoble-inp.org', 'ottograf', 'graf', 'otto', '7 rue de la Paix Paris')",
             "INSERT INTO UTILISATEURS VALUES ('1')",
             "INSERT INTO UTILISATEURS VALUES ('2')",
-            "INSERT INTO UTILISATEURS VALUES ('3')"
+            "INSERT INTO UTILISATEURS VALUES ('3')",
+            "INSERT INTO CARACTERISTIQUES VALUES ('2', 'poids', '600g')"
     };
 
     public InsertTuples() {
