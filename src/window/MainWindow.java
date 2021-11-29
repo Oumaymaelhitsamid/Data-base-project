@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.sql.SQLException;
+
 
 public class MainWindow extends JFrame{
 
@@ -27,6 +29,7 @@ public class MainWindow extends JFrame{
     private JLabel label;
     private JPanel contentPane;
 
+    private String idUser;
     /**
      * Launch the application.
      */
@@ -59,11 +62,46 @@ public class MainWindow extends JFrame{
         lblNewLabel.setBounds(350, 13, 600, 93);
         contentPane.add(lblNewLabel);
 
-        btnNewButton = new JButton("Click");
+
+        btnNewButton = new JButton("Offres");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(545, 392, 162, 73);
+        btnNewButton.setBounds(200, 200, 150, 73);
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+        			    ParcoursOffres frame = new ParcoursOffres("", "");
+                  frame.setVisible(true);
+        	        new ParcoursOffres(prenom, nom);
+
+        		}catch(SQLException er) {
+                    System.err.println("Cannot access database or respond to the request");
+                    er.printStackTrace(System.err);
+                }
+        	}
+        });
         contentPane.add(btnNewButton);
+
+
+        btnNewButton = new JButton("Droit à l'oubli");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnNewButton.setBounds(500, 200, 250, 73);
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    ForgetMeWindow frame = new ForgetMeWindow();
+                    frame.setVisible(true);
+        	        new ForgetMeWindow();
+        		}catch(Exception er) {
+                    System.err.println("Cannot access database or respond to the request");
+                    er.printStackTrace(System.err);
+                }
+        	}
+        });
+        contentPane.add(btnNewButton);
+
     }
 
 
+
 }
+
