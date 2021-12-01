@@ -29,9 +29,9 @@ public class AccesWindow extends JFrame{
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "arvyp";
-    static final String PASSWD = "arvyp";
-
+    static final String USER = "guiziova";
+    static final String PASSWD = "guiziova";
+ 
     /**
      * Launch the application.
      */
@@ -110,13 +110,13 @@ public class AccesWindow extends JFrame{
                     conn.setAutoCommit(false);
                     System.out.println("connected");
 
-                    PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT mdp, nom, prenom FROM COMPTES WHERE email = ?");
+                    PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT mdp, IDUTILISATEUR FROM COMPTES WHERE email = ?");
                     stmt_interrogation.setString(1, userName);
                     ResultSet rset = stmt_interrogation.executeQuery();
                     conn.commit();
                     if (rset.next() && rset.getString(1).equals(password)){
                         try {
-                            MainWindow mainFrame = new MainWindow(rset.getString(3) ,rset.getString(2));
+                            MainWindow mainFrame = new MainWindow(rset.getString(2));
                             mainFrame.setVisible(true);
                         } catch (Exception er) {
                             er.printStackTrace();
