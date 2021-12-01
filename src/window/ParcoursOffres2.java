@@ -22,8 +22,8 @@ public class ParcoursOffres2 extends JFrame{
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "trouchda";
-    static final String PASSWD = "trouchda";
+    static final String USER = "guiziova";
+    static final String PASSWD = "guiziova";
 
 
 
@@ -65,6 +65,7 @@ public class ParcoursOffres2 extends JFrame{
 
         while (rset.next()){
             results.add(rset.getString(1));
+
         }
 
         rset.close();
@@ -83,40 +84,53 @@ public class ParcoursOffres2 extends JFrame{
 
                 public void actionPerformed(ActionEvent e) {
                     try{
-                        // Loading of the Oracle Driver
-                        System.out.print("Loading Oracle driver... ");
-                        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-                        System.out.println("loaded");
-
-                        // Connection to the database
-                        System.out.print("Connecting to the database... ");
-                        Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-                        conn.setAutoCommit(false);
-                        System.out.println("connected");
-
-                        PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT Nomcategoriefille from apourmere where nomcategoriemere = ?");
-                        stmt_interrogation.setString(1, result);
-                        ResultSet rset = stmt_interrogation.executeQuery();
-                        conn.commit();
-                        try {
-                            System.out.println("test");
-                        } catch (Exception er) {
-                            er.printStackTrace();
-                        }
-                        System.out.println("Login Successfully");
-
-
-                        rset.close();
-                        stmt_interrogation.close();
-                        conn.close();
-                    }   catch (SQLException er) {
-                        System.err.println("Cannot access database or respond to the request");
-                        er.printStackTrace(System.err);
+                        ParcoursOffres2 parcours = new ParcoursOffres2(result, "");
+                        parcours.setVisible(true);
+                    }   catch (Exception ee) {
+                        ee.printStackTrace();
                     }
 
                 }
 
             });
+
+        };
+
+        // Loading of the Oracle Driver
+        System.out.print("Loading Oracle driver... ");
+        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        System.out.println("loaded");
+
+        // Connection to the database
+        System.out.print("Connecting to the database... ");
+        Connection conn2 = DriverManager.getConnection(CONN_URL, USER, PASSWD);
+        conn2.setAutoCommit(false);
+        System.out.println("connected");
+
+
+        PreparedStatement stmt_interrogation2 = conn2.prepareStatement("SELECT intitule, idproduit from produits where nomcategorie = ?");
+
+        stmt_interrogation2.setString(1, prenom);
+        ResultSet rset2 = stmt_interrogation2.executeQuery();
+        conn2.commit();
+        ArrayList<String> results2 = new ArrayList<String>();
+
+        while (rset2.next()){
+            results2.add(rset2.getString(1));
+        }
+
+        rset2.close();
+        stmt_interrogation2.close();
+        conn2.close();
+
+
+        for (String result2 : results2){
+            btnNewButton = new JButton(result2);
+            btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 26));
+            btnNewButton.setBounds(50 + (position*400) %600, 100 + 100*(position/2), 350, 73);
+            contentPane.add(btnNewButton);
+            position += 1;
+
 
         };
     }
