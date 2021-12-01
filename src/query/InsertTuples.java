@@ -47,7 +47,6 @@ public class InsertTuples {
 
             PreparedStatement stmt_test;
             for(int i=0; i<N; i++){
-                System.out.println("1");
                 stmt_test = conn.prepareStatement(insertions[i]);
                 stmt_test.executeQuery();
                 stmt_test.close();
