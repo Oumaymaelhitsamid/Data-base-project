@@ -6,8 +6,8 @@ import java.util.Calendar;
 public class InsertTuples {
     // Pour se connecter à la base de données :
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "arvyp";
-    static final String PASSWD = "arvyp";
+    static final String USER = "trouchda";
+    static final String PASSWD = "trouchda";
 
     private int N = 17;
     private static String[] insertions = new String[]{
