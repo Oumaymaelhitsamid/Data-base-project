@@ -55,7 +55,7 @@ public class CreateAccountWindow extends JFrame{
     public CreateAccountWindow(){
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(450, 190, 600, 400);
+        setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,7 +70,7 @@ public class CreateAccountWindow extends JFrame{
 
         prenomField = new JTextField();
         prenomField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        prenomField.setBounds(250, 50, 280, 40);
+        prenomField.setBounds(250, 60, 280, 40);
         contentPane.add(prenomField);
         prenomField.setColumns(10);
 
@@ -78,12 +78,12 @@ public class CreateAccountWindow extends JFrame{
         lblPrenom.setBackground(Color.BLACK);
         lblPrenom.setForeground(Color.BLACK);
         lblPrenom.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblPrenom.setBounds(10, 50, 240, 40);
+        lblPrenom.setBounds(10, 60, 240, 40);
         contentPane.add(lblPrenom);
 
         nomField = new JTextField();
         nomField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        nomField.setBounds(250, 90, 280, 40);
+        nomField.setBounds(250, 110, 280, 40);
         contentPane.add(nomField);
         nomField.setColumns(20);
 
@@ -91,12 +91,12 @@ public class CreateAccountWindow extends JFrame{
         lblNom.setBackground(Color.BLACK);
         lblNom.setForeground(Color.BLACK);
         lblNom.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblNom.setBounds(10, 91, 240, 40);
+        lblNom.setBounds(10, 110, 240, 40);
         contentPane.add(lblNom);
 
         adresseField = new JTextField();
         adresseField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        adresseField.setBounds(250, 130, 280, 40);
+        adresseField.setBounds(250, 160, 280, 40);
         contentPane.add(adresseField);
         adresseField.setColumns(10);
 
@@ -104,12 +104,12 @@ public class CreateAccountWindow extends JFrame{
         lblAdresse.setBackground(Color.BLACK);
         lblAdresse.setForeground(Color.BLACK);
         lblAdresse.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblAdresse.setBounds(10, 130, 240, 40);
+        lblAdresse.setBounds(10, 160, 240, 40);
         contentPane.add(lblAdresse);
 
         emailField = new JTextField();
         emailField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        emailField.setBounds(250, 170, 280, 40);
+        emailField.setBounds(250, 210, 280, 40);
         contentPane.add(emailField);
         emailField.setColumns(10);
 
@@ -117,36 +117,36 @@ public class CreateAccountWindow extends JFrame{
         lblEmail.setBackground(Color.BLACK);
         lblEmail.setForeground(Color.BLACK);
         lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblEmail.setBounds(10, 170, 240, 40);
+        lblEmail.setBounds(10, 210, 240, 40);
         contentPane.add(lblEmail);
 
         passwordField1 = new JPasswordField();
         passwordField1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        passwordField1.setBounds(250, 210, 280, 40);
+        passwordField1.setBounds(250, 260, 280, 40);
         contentPane.add(passwordField1);
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setForeground(Color.BLACK);
         lblPassword.setBackground(Color.CYAN);
         lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblPassword.setBounds(10, 210, 240, 40);
+        lblPassword.setBounds(10, 260, 240, 40);
         contentPane.add(lblPassword);
 
         passwordField2 = new JPasswordField();
         passwordField2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        passwordField2.setBounds(250, 250, 280, 40);
+        passwordField2.setBounds(250, 310, 280, 40);
         contentPane.add(passwordField2);
 
         JLabel lblPasswordC = new JLabel("Confirm");
         lblPasswordC.setForeground(Color.BLACK);
         lblPasswordC.setBackground(Color.CYAN);
         lblPasswordC.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblPasswordC.setBounds(10, 250, 240, 40);
+        lblPasswordC.setBounds(10, 310, 240, 40);
         contentPane.add(lblPasswordC);
 
         btnNewButton = new JButton("Create");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        btnNewButton.setBounds(10, 290, 520, 40);
+        btnNewButton.setBounds(10, 360, 520, 40);
 
         btnNewButton.addActionListener(new ActionListener() {
 
@@ -196,6 +196,10 @@ public class CreateAccountWindow extends JFrame{
                         stmt_interrogation.close();
                         rset_interrogation.close();
                         conn.close();
+
+                        setVisible(false);
+                        FirstWindow firstFrame = new FirstWindow();
+                        firstFrame.setVisible(true);
 
                     }   catch (SQLException er) {
                         System.err.println("Cannot create the account, sorry");

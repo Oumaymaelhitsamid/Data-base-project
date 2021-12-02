@@ -1,14 +1,21 @@
 package test;
 
 import window.AccesWindow;
+import window.FirstWindow;
+
+import java.awt.*;
 
 public class TestGange {
 	public static void main(String[] args) {
-		AccesWindow login = new AccesWindow();
-		System.out.println("test");
-
-		char[] test = new char[]{'a', 'b'};
-		System.out.println(new String(test));
-		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FirstWindow frame = new FirstWindow();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

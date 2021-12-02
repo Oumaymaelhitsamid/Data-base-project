@@ -9,7 +9,7 @@ public class InsertTuples {
     static final String USER = "arvyp";
     static final String PASSWD = "arvyp";
 
-    private int N = 17;
+    private int N = 19;
     private static String[] insertions = new String[]{
             "INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console nulle', 'paspourlinstant', 'Console')",
             "INSERT INTO PRODUITS VALUES ('2', 'Playstation 5', '300', 'trop bien', 'nop', 'Console')",
@@ -28,7 +28,8 @@ public class InsertTuples {
             "INSERT INTO UTILISATEURS VALUES ('1')",
             "INSERT INTO UTILISATEURS VALUES ('2')",
             "INSERT INTO UTILISATEURS VALUES ('3')",
-            "INSERT INTO CARACTERISTIQUES VALUES ('2', 'poids', '600g')"
+            "INSERT INTO CARACTERISTIQUES VALUES ('2', 'poids', '600g')",
+            "INSERT INTO CARACTERISTIQUES VALUES ('2', 'couleur', 'noir')"
     };
 
     public InsertTuples() {

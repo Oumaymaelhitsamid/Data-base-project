@@ -2,20 +2,16 @@ package window;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class ProductWindow extends JFrame{
@@ -118,26 +114,19 @@ public class ProductWindow extends JFrame{
                 contentPane.add(url);
             }
 
-            stmt_graphic.close();
-            stmt_graphic = conn.prepareStatement("SELECT caracteristique, valeurCarac FROM CARACTERISTIQUES WHERE idProduit = ?");
-            stmt_graphic.setString(1, productID);
-            rset = stmt_graphic.executeQuery();
+            PreparedStatement stmt_graphic2 = conn.prepareStatement("SELECT caracteristique, valeurCarac FROM CARACTERISTIQUES WHERE idProduit = ?");
+            stmt_graphic2.setString(1, productID);
+            ResultSet rset2 = stmt_graphic2.executeQuery();
 
-            // TODO AFFICHAGE DES CARACTERISTIQUES A STAFFER
-            int cpt = 0;
-            while(rset.next()){
-                JLabel carac;
-                if (cpt%2==0){
-                    carac = new JLabel("( " + rset.getString(1));
-                } else {
-                    carac = new JLabel(", " + rset.getString(1) + " )");
-                    carac.setForeground(Color.BLACK);
-                    carac.setBackground(Color.CYAN);
-                    carac.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                    carac.setBounds(10 + cpt * 40, 210, 900, 40);
-                    contentPane.add(carac);
-                }
-                cpt+=1;
+            int cpt = 1;
+            while(rset2.next()){
+                JLabel carac = new JLabel(rset2.getString(1) + " : " + rset2.getString(2) + ", ");
+                carac.setForeground(Color.BLACK);
+                carac.setBackground(Color.CYAN);
+                carac.setFont(new Font("Tahoma", Font.PLAIN, 18));
+                carac.setBounds(10 + (cpt - 1) * 150, 210, 200, 40);
+                contentPane.add(carac);
+                cpt = cpt + 1;
             }
 
             stmt_graphic.close();
@@ -157,10 +146,6 @@ public class ProductWindow extends JFrame{
                 String date = LocalDate.now().toString();
                 String time = LocalTime.now().toString();
                 System.out.println(time);
-                String delimBar = "-";
-                String delimPoints = ":";
-                String[] date_tab = date.split(delimBar);
-                String[] time_tab = time.split(delimPoints);
 
                 try{
                     // Loading of the Oracle Driver
@@ -177,15 +162,15 @@ public class ProductWindow extends JFrame{
                     // Price Proposed by the user
                     String priceProposed = enchereField.getText();
 
-                    PreparedStatement stmt_verif1 = conn.prepareStatement("SELECT idUtilisateur FROM OFFRES WHERE idProduit = ?");
+                    PreparedStatement stmt_verif1 = conn.prepareStatement("SELECT idUtilisateur FROM OFFRES WHERE idProduit = ? AND prixPropose = (SELECT MAX(prixPropose) FROM OFFRES WHERE idProduit = ?)");
                     stmt_verif1.setString(1, productID);
+                    stmt_verif1.setString(2, productID);
                     ResultSet rset_verif1 = stmt_verif1.executeQuery();
 
                     PreparedStatement stmt_verif2 = conn.prepareStatement("SELECT prixCourant FROM PRODUITS WHERE idProduit = ?");
                     stmt_verif2.setString(1, productID);
                     ResultSet rset_verif2 = stmt_verif2.executeQuery();
 
-                    // TODO Test à staffer, il peut y avoir plusieurs utilisateurs sur une seule offre
                     if(rset_verif1.next() && rset_verif1.getString(1).equals(accountID)){
                         System.out.println("Last proposition is already yours.");
                     }
@@ -223,7 +208,13 @@ public class ProductWindow extends JFrame{
                             stmt_insertion2.setString(4, priceProposed);
                             stmt_insertion2.setString(5, accountID);
                             stmt_insertion2.executeQuery();
-                            stmt_insertion2.close();
+
+                            PreparedStatement stmt_insertion3 = conn.prepareStatement("UPDATE PRODUITS SET prixCourant = ? WHERE idProduit = ?");
+                            stmt_insertion3.setString(1, priceProposed);
+                            stmt_insertion3.setString(2, productID);
+                            stmt_insertion3.executeQuery();
+                            stmt_insertion3.close();
+
                             conn.commit();
                             System.out.println("Your proposition is accepted");
                         }
