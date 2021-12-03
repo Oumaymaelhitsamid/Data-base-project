@@ -17,9 +17,7 @@ public class ParcoursOffres2 extends JFrame{
     private JButton btnNewButton;
     private JLabel label;
     private JPanel contentPane;
-    private String accountID;
     private ArrayList<String> path;
-    private String prenom;
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
@@ -28,10 +26,9 @@ public class ParcoursOffres2 extends JFrame{
 
 
 
-    public ParcoursOffres2(String prenom, ArrayList<String> path, String accountID) throws SQLException {
+    public ParcoursOffres2(String result, ArrayList<String> path, String accountID) throws SQLException {
 
 
-        this.prenom = prenom;
         this.path = path;
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -60,7 +57,7 @@ public class ParcoursOffres2 extends JFrame{
         System.out.println("connected");
 
         PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT Nomcategoriefille from apourmere where nomcategoriemere = ?");
-        stmt_interrogation.setString(1, prenom);
+        stmt_interrogation.setString(1, result);
         ResultSet rset = stmt_interrogation.executeQuery();
         conn.commit();
         ArrayList<String> results = new ArrayList<String>();
@@ -74,9 +71,10 @@ public class ParcoursOffres2 extends JFrame{
         stmt_interrogation.close();
         conn.close();
 
+
         int position = 0;
-        for (String result : results) {
-            btnNewButton = new JButton(result);
+        for (String query : results) {
+            btnNewButton = new JButton(query);
             btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
             btnNewButton.setBounds(50 + (200 * position) % 800, 100 + 100 * (position / 5), 162, 73);
             contentPane.add(btnNewButton);
@@ -86,8 +84,8 @@ public class ParcoursOffres2 extends JFrame{
 
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        path.add(result);
-                        ParcoursOffres2 parcours = new ParcoursOffres2(result, path, accountID);
+                        path.add(query);
+                        ParcoursOffres2 parcours = new ParcoursOffres2(query, path, accountID);
                         parcours.setVisible(true);
                         dispose();
                     } catch (Exception ee) {
@@ -114,13 +112,15 @@ public class ParcoursOffres2 extends JFrame{
 
         PreparedStatement stmt_interrogation2 = conn2.prepareStatement("SELECT intitule, idproduit from produits where nomcategorie = ?");
 
-        stmt_interrogation2.setString(1, prenom);
+        stmt_interrogation2.setString(1, result);
         ResultSet rset2 = stmt_interrogation2.executeQuery();
         conn2.commit();
         ArrayList<String> results2 = new ArrayList<String>();
+        ArrayList<String> idprod = new ArrayList<String>();
 
         while (rset2.next()){
             results2.add(rset2.getString(1));
+            idprod.add(rset2.getString(2));
         }
 
         rset2.close();
@@ -134,6 +134,26 @@ public class ParcoursOffres2 extends JFrame{
             btnNewButton.setBounds(50 + (position*400) %600, 100 + 100*(position/2), 350, 73);
             contentPane.add(btnNewButton);
             position += 1;
+
+
+
+            btnNewButton.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        path.add(result2);
+                        ProductWindow product = new ProductWindow(accountID, "3", 5 );
+                        product.setVisible(true);
+                        dispose();
+                    } catch (Exception ee) {
+                        ee.printStackTrace();
+                    }
+
+                }
+
+            });
+
+
 
 
         };
