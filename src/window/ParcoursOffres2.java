@@ -28,9 +28,9 @@ public class ParcoursOffres2 extends JFrame{
 
 
 
-    public ParcoursOffres2(String prenom, ArrayList<String> path) throws SQLException {
+    public ParcoursOffres2(String prenom, ArrayList<String> path, String accountID) throws SQLException {
 
-        accountID = null;
+
         this.prenom = prenom;
         this.path = path;
 
@@ -87,7 +87,7 @@ public class ParcoursOffres2 extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     try {
                         path.add(result);
-                        ParcoursOffres2 parcours = new ParcoursOffres2(result, path);
+                        ParcoursOffres2 parcours = new ParcoursOffres2(result, path, accountID);
                         parcours.setVisible(true);
                         dispose();
                     } catch (Exception ee) {
@@ -150,11 +150,11 @@ public class ParcoursOffres2 extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try{
                     if (path.isEmpty()) {
-                        ParcoursOffres frame = new ParcoursOffres();
+                        ParcoursOffres frame = new ParcoursOffres(accountID);
                         frame.setVisible(true);
                         dispose();
                     }else{
-                        ParcoursOffres2 frame = new ParcoursOffres2(path.remove(path.size()-1),path);
+                        ParcoursOffres2 frame = new ParcoursOffres2(path.remove(path.size()-1),path, accountID);
                         frame.setVisible(true);
                         dispose();
                     }

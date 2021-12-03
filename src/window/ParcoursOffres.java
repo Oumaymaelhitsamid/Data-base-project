@@ -22,7 +22,6 @@ public class ParcoursOffres extends JFrame {
     private JButton btnNewButton;
     private JLabel label;
     private JPanel contentPane;
-    private String accountID;
     private ArrayList<String> path = new ArrayList<String>();
 
     // For database
@@ -38,7 +37,7 @@ public class ParcoursOffres extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ParcoursOffres frame = new ParcoursOffres();
+                    ParcoursOffres frame = new ParcoursOffres("2");
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -47,9 +46,9 @@ public class ParcoursOffres extends JFrame {
         });
     }
 
-    public ParcoursOffres() throws SQLException {
+    public ParcoursOffres(String accountID) throws SQLException {
 
-        accountID = null;
+
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(450, 190, 1014, 597);
@@ -102,7 +101,7 @@ public class ParcoursOffres extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         path.add(result);
-                        ParcoursOffres2 parcours = new ParcoursOffres2(result, path);
+                        ParcoursOffres2 parcours = new ParcoursOffres2(result, path, accountID);
                         parcours.setVisible(true);
                         dispose();
                     } catch (Exception ee) {
@@ -124,7 +123,7 @@ public class ParcoursOffres extends JFrame {
 
             public void actionPerformed(ActionEvent e) {
                 try {
-                    MainWindow frame = new MainWindow("","");
+                    MainWindow frame = new MainWindow(accountID);
                     frame.setVisible(true);
                     dispose();
                 } catch (Exception ee) {
