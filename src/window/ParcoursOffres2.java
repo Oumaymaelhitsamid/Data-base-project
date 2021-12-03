@@ -18,6 +18,7 @@ public class ParcoursOffres2 extends JFrame{
     private JLabel label;
     private JPanel contentPane;
     private String accountID;
+    private ArrayList<String> path;
     private String prenom;
 
     // For database
@@ -27,10 +28,11 @@ public class ParcoursOffres2 extends JFrame{
 
 
 
-    public ParcoursOffres2(String prenom, String nom) throws SQLException {
+    public ParcoursOffres2(String prenom, ArrayList<String> path, String accountID) throws SQLException {
 
-        accountID = null;
+
         this.prenom = prenom;
+        this.path = path;
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(450, 190, 1014, 597);
@@ -73,28 +75,30 @@ public class ParcoursOffres2 extends JFrame{
         conn.close();
 
         int position = 0;
-        for (String result : results){
+        for (String result : results) {
             btnNewButton = new JButton(result);
             btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-            btnNewButton.setBounds(50 + (200*position)%800, 100 + 100*(position/5), 162, 73);
+            btnNewButton.setBounds(50 + (200 * position) % 800, 100 + 100 * (position / 5), 162, 73);
             contentPane.add(btnNewButton);
             position += 1;
 
             btnNewButton.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
-                    try{
-                        ParcoursOffres2 parcours = new ParcoursOffres2(result, "");
+                    try {
+                        path.add(result);
+                        ParcoursOffres2 parcours = new ParcoursOffres2(result, path, accountID);
                         parcours.setVisible(true);
-                    }   catch (Exception ee) {
+                        dispose();
+                    } catch (Exception ee) {
                         ee.printStackTrace();
                     }
 
                 }
 
             });
+        }
 
-        };
 
         // Loading of the Oracle Driver
         System.out.print("Loading Oracle driver... ");
@@ -133,5 +137,34 @@ public class ParcoursOffres2 extends JFrame{
 
 
         };
+
+
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnNewButton.setBounds(0, 0, 50, 30);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    if (path.isEmpty()) {
+                        ParcoursOffres frame = new ParcoursOffres(accountID);
+                        frame.setVisible(true);
+                        dispose();
+                    }else{
+                        ParcoursOffres2 frame = new ParcoursOffres2(path.remove(path.size()-1),path, accountID);
+                        frame.setVisible(true);
+                        dispose();
+                    }
+
+                    }catch (Exception ee) {
+                        ee.printStackTrace();
+                    }
+
+                }
+
+            });
     }
 }

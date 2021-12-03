@@ -108,7 +108,7 @@ public class MainWindow extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             setVisible(false);
-                            ParcoursOffres frameOffres = new ParcoursOffres("", "");
+                            ParcoursOffres frameOffres = new ParcoursOffres(id);
                             frameOffres.setVisible(true);
                         } catch (Exception er) {
                             System.err.println("Connot charge offers");
