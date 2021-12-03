@@ -54,7 +54,7 @@ public class CreateAccountWindow extends JFrame{
 
     public CreateAccountWindow(){
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -197,7 +197,7 @@ public class CreateAccountWindow extends JFrame{
                         rset_interrogation.close();
                         conn.close();
 
-                        setVisible(false);
+                        dispose();
                         FirstWindow firstFrame = new FirstWindow();
                         firstFrame.setVisible(true);
 
@@ -213,6 +213,28 @@ public class CreateAccountWindow extends JFrame{
         label = new JLabel("");
         label.setBounds(0, 0, 1008, 562);
         contentPane.add(label);
+
+        // Back button
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    FirstWindow frame = new FirstWindow();
+                    frame.setVisible(true);
+                    dispose();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
     }
 
 

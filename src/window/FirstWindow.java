@@ -49,7 +49,7 @@ public class FirstWindow extends JFrame{
 
     public FirstWindow(){
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -70,7 +70,7 @@ public class FirstWindow extends JFrame{
         btnNewButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                dispose();
                 AccesWindow accessWindow = new AccesWindow();
                 accessWindow.setVisible(true);
             }

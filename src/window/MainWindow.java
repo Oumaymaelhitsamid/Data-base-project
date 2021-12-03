@@ -34,22 +34,6 @@ public class MainWindow extends JFrame {
     private String prenom;
     private String nom;
 
-    public String getPrenom() {
-        return this.prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getNom() {
-        return this.nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     /**
      * Launch the application.
      */
@@ -67,7 +51,7 @@ public class MainWindow extends JFrame {
     }
 
     public MainWindow(String id) {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -107,7 +91,7 @@ public class MainWindow extends JFrame {
                 btnNewButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            setVisible(false);
+                            dispose();
                             ParcoursOffres frameOffres = new ParcoursOffres(id);
                             frameOffres.setVisible(true);
                         } catch (Exception er) {

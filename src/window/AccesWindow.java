@@ -50,7 +50,7 @@ public class AccesWindow extends JFrame{
 
     public AccesWindow(){
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -69,7 +69,7 @@ public class AccesWindow extends JFrame{
         textField.setBounds(110, 10, 250, 40);
         contentPane.add(textField);
         textField.setColumns(10);
-        contentPane = new JPanel();
+
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
         passwordField.setBounds(110, 60, 250, 40);
@@ -109,7 +109,7 @@ public class AccesWindow extends JFrame{
                     conn.commit();
                     if (rset.next() && rset.getString(1).equals(password)){
                         try {
-                            setVisible(false);
+                            dispose();
                             System.out.println(rset.getString(2));
                             MainWindow mainFrame = new MainWindow(rset.getString(2));
                             mainFrame.setVisible(true);
@@ -136,6 +136,28 @@ public class AccesWindow extends JFrame{
         label = new JLabel("");
         label.setBounds(0, 0, 1008, 562);
         contentPane.add(label);
+
+        // Back button
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    FirstWindow frame = new FirstWindow();
+                    frame.setVisible(true);
+                    dispose();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
     }
 
 

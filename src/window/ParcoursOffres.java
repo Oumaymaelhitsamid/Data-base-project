@@ -51,7 +51,7 @@ public class ParcoursOffres extends JFrame {
 
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(450, 190, 1014, 597);
+        setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,8 +60,8 @@ public class ParcoursOffres extends JFrame {
 
         JLabel lblNewLabel = new JLabel("Choisissez une catégorie de produits");
         lblNewLabel.setForeground(Color.BLACK);
-        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 46));
-        lblNewLabel.setBounds(150, 13, 800, 93);
+        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        lblNewLabel.setBounds(15, 15, 500, 40);
         contentPane.add(lblNewLabel);
 
         // Loading of the Oracle Driver
@@ -91,8 +91,8 @@ public class ParcoursOffres extends JFrame {
         int position = 0;
         for (String result : results) {
             btnNewButton = new JButton(result);
-            btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-            btnNewButton.setBounds(50 + (200 * position) % 800, 100 + 100 * (position / 5), 162, 73);
+            btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            btnNewButton.setBounds(10 + (140 * position) % 600, 50 + 40 * (position / 4), 135, 40);
             contentPane.add(btnNewButton);
             position += 1;
 
@@ -113,9 +113,10 @@ public class ParcoursOffres extends JFrame {
             });
         }
 
+        // Back button
         btnNewButton = new JButton("back");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(0, 0, 50, 30);
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
         contentPane.add(btnNewButton);
 
 
@@ -133,6 +134,7 @@ public class ParcoursOffres extends JFrame {
             }
 
         });
+
 
     }
 }

@@ -48,7 +48,7 @@ public class ProductWindow extends JFrame{
         // Partie graphique...
         // Pour la fenêtre principale
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(450, 190, 1000, 300);
+        setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,15 +57,15 @@ public class ProductWindow extends JFrame{
 
         // Pour le champ à remplir
         enchereField = new JTextField();
-        enchereField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        enchereField.setBounds(10, 50, 300, 40);
+        enchereField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        enchereField.setBounds(10, 10, 200, 40);
         contentPane.add(enchereField);
         enchereField.setColumns(10);
 
         // Pour le bouton
         propositionButton = new JButton("Proposer un prix");
-        propositionButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        propositionButton.setBounds(315, 50, 350, 40);
+        propositionButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        propositionButton.setBounds(220, 10, 200, 40);
 
         // Pour les caractéristiques d'un produit en particulier
         try{
@@ -88,29 +88,29 @@ public class ProductWindow extends JFrame{
                 // Pour l'intitulé du produit
                 JLabel lblNewLabel = new JLabel(rset.getString(2));
                 lblNewLabel.setForeground(Color.BLACK);
-                lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-                lblNewLabel.setBounds(10, 10, 600, 40);
+                lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+                lblNewLabel.setBounds(10, 50, 590, 40);
                 contentPane.add(lblNewLabel);
                 // Pour le prix de la dernière enchère proposée
                 JLabel prixCourant = new JLabel("Dernière enchère : " + rset.getString(3));
                 prixCourant.setForeground(Color.BLACK);
                 prixCourant.setBackground(Color.CYAN);
                 prixCourant.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                prixCourant.setBounds(10, 90, 700, 40);
+                prixCourant.setBounds(10, 90, 590, 40);
                 contentPane.add(prixCourant);
                 // Pour la description du produit
                 JLabel description = new JLabel("Description : " + rset.getString(4));
                 description.setForeground(Color.BLACK);
                 description.setBackground(Color.CYAN);
                 description.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                description.setBounds(10, 130, 900, 40);
+                description.setBounds(10, 130, 590, 40);
                 contentPane.add(description);
                 // Pour l'URL d'une photo
                 JLabel url = new JLabel("URL photo : " + rset.getString(5));
                 url.setForeground(Color.BLACK);
                 url.setBackground(Color.CYAN);
                 url.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                url.setBounds(10, 170, 900, 40);
+                url.setBounds(10, 170, 590, 40);
                 contentPane.add(url);
             }
 
@@ -118,13 +118,13 @@ public class ProductWindow extends JFrame{
             stmt_graphic2.setString(1, productID);
             ResultSet rset2 = stmt_graphic2.executeQuery();
 
-            int cpt = 1;
+            int cpt = 0;
             while(rset2.next()){
                 JLabel carac = new JLabel(rset2.getString(1) + " : " + rset2.getString(2) + ", ");
                 carac.setForeground(Color.BLACK);
                 carac.setBackground(Color.CYAN);
                 carac.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                carac.setBounds(10 + (cpt - 1) * 150, 210, 200, 40);
+                carac.setBounds(10 + cpt * 150, 210, 200, 40);
                 contentPane.add(carac);
                 cpt = cpt + 1;
             }
@@ -217,6 +217,9 @@ public class ProductWindow extends JFrame{
 
                             conn.commit();
                             System.out.println("Your proposition is accepted");
+                            dispose();
+                            ProductWindow frame = new ProductWindow(accountID, productID, NUMBER_OF_OFFER);
+                            frame.setVisible(true);
                         }
                     }
                     conn.close();
@@ -234,7 +237,7 @@ public class ProductWindow extends JFrame{
         contentPane.add(propositionButton);
 
         label = new JLabel("");
-        label.setBounds(0, 0, 1008, 562);
+        label.setBounds(0, 0, 0, 0);
         contentPane.add(label);
     }
 

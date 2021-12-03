@@ -29,10 +29,10 @@ public class ForgetMeWindow extends JFrame {
     private JPanel contentPane;
 
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "arvyp";
-    static final String PASSWD = "arvyp";
+    static final String USER = "guiziova";
+    static final String PASSWD = "guiziova";
 
-
+    
     static private String idUser;
 
     public static void main(String[] args) {
@@ -48,17 +48,17 @@ public class ForgetMeWindow extends JFrame {
         });
     }
 
+  
 
-
-
+    
     public ForgetMeWindow(String id) {
     	this.idUser = id;
         }
-
-
+    
+    
     public void Forget(){
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(450, 190, 1014, 597);
         setResizable(false);
         contentPane = new JPanel();
@@ -72,12 +72,12 @@ public class ForgetMeWindow extends JFrame {
         labelArea.setBounds(10, 13, 1500, 300);
         contentPane.add(labelArea);
 
-
-
+        
+        
         btnNewButton = new JButton("Continuer");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(400, 392, 162, 73);
-
+        btnNewButton.setBounds(400, 392, 162, 73); 
+ 
     	btnNewButton.addActionListener(new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
@@ -93,11 +93,11 @@ public class ForgetMeWindow extends JFrame {
                 Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
                 conn.setAutoCommit(false);
                 System.out.println("connected");
-
+                
                 PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT email, mdp FROM COMPTES WHERE IDUTILISATEUR = ?");
                 stmt_interrogation.setString(1, idUser);
                 ResultSet rset = stmt_interrogation.executeQuery();
-
+				
                 if (rset.next()) {
                     try {
                         System.out.println("jarrive bien ici");
@@ -146,10 +146,10 @@ public class ForgetMeWindow extends JFrame {
     });
 
     contentPane.add(btnNewButton);
-
-
-
-
+    
+    
+    
+    
     label = new JLabel("");
     label.setBounds(0, 0, 1008, 562);
     contentPane.add(label);
