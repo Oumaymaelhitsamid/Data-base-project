@@ -17,7 +17,6 @@ public class ParcoursOffres2 extends JFrame{
     private JButton btnNewButton;
     private JLabel label;
     private JPanel contentPane;
-    private ArrayList<String> path;
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
@@ -28,8 +27,6 @@ public class ParcoursOffres2 extends JFrame{
 
     public ParcoursOffres2(String result, ArrayList<String> path, String accountID) throws SQLException {
 
-
-        this.path = path;
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
@@ -127,8 +124,11 @@ public class ParcoursOffres2 extends JFrame{
         stmt_interrogation2.close();
         conn2.close();
 
+        int cpt = 0;
+
 
         for (String result2 : results2){
+            cpt += 1;
             btnNewButton = new JButton(result2);
             btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 10));
             btnNewButton.setBounds(10 + (140 * position) % 600, 50 + 40 * (position / 4), 135, 40);
@@ -136,13 +136,15 @@ public class ParcoursOffres2 extends JFrame{
             position += 1;
 
 
+            int finalCpt = cpt;
+
 
             btnNewButton.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
                     try {
                         path.add(result2);
-                        ProductWindow product = new ProductWindow(accountID, "3", 5 );
+                        ProductWindow product = new ProductWindow(accountID, idprod.get(finalCpt-1), 5);
                         product.setVisible(true);
                         dispose();
                     } catch (Exception ee) {
@@ -158,6 +160,12 @@ public class ParcoursOffres2 extends JFrame{
 
         };
 
+        for (String chemin : path){
+            System.out.println(chemin);
+        }
+
+        System.out.println("Le chemin est" + path.get(path.size()-1));
+
 
         // Back button
         btnNewButton = new JButton("back");
@@ -169,12 +177,15 @@ public class ParcoursOffres2 extends JFrame{
 
             public void actionPerformed(ActionEvent e) {
                 try{
-                    if (path.isEmpty()) {
+                    if (path.isEmpty() || path.size() ==1) {
                         ParcoursOffres frame = new ParcoursOffres(accountID);
                         frame.setVisible(true);
                         dispose();
                     }else{
-                        ParcoursOffres2 frame = new ParcoursOffres2(path.remove(path.size()-1),path, accountID);
+                        ParcoursOffres2 frame = new ParcoursOffres2(path.remove(path.size()-2),path, accountID);
+                        for (String chemin : path){
+                            System.out.println(chemin);
+                        }
                         frame.setVisible(true);
                         dispose();
                     }
