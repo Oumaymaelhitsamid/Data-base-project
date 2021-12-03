@@ -9,7 +9,7 @@ public class InsertTuples {
     static final String USER = "arvyp";
     static final String PASSWD = "arvyp";
 
-    private int N = 17;
+    private int N = 19;
     private static String[] insertions = new String[]{
             "INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console nulle', 'paspourlinstant', 'Console')",
             "INSERT INTO PRODUITS VALUES ('2', 'Playstation 5', '300', 'trop bien', 'nop', 'Console')",
@@ -27,7 +27,9 @@ public class InsertTuples {
             "INSERT INTO COMPTES VALUES ('3', 'ottograf@grenoble-inp.org', 'ottograf', 'graf', 'otto', '7 rue de la Paix Paris')",
             "INSERT INTO UTILISATEURS VALUES ('1')",
             "INSERT INTO UTILISATEURS VALUES ('2')",
-            "INSERT INTO UTILISATEURS VALUES ('3')"
+            "INSERT INTO UTILISATEURS VALUES ('3')",
+            "INSERT INTO CARACTERISTIQUES VALUES ('2', 'poids', '600g')",
+            "INSERT INTO CARACTERISTIQUES VALUES ('2', 'couleur', 'noir')"
     };
 
     public InsertTuples() {
@@ -46,7 +48,6 @@ public class InsertTuples {
 
             PreparedStatement stmt_test;
             for(int i=0; i<N; i++){
-                System.out.println("1");
                 stmt_test = conn.prepareStatement(insertions[i]);
                 stmt_test.executeQuery();
                 stmt_test.close();
