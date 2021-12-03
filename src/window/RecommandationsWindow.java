@@ -250,5 +250,28 @@ public class RecommandationsWindow extends JFrame{
             ee.printStackTrace();
         }
 
+        // Back button
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    MainWindow frame = new MainWindow(accountID);
+                    frame.setVisible(true);
+                    dispose();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
+
+
     }
 }

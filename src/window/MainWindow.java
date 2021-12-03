@@ -85,9 +85,9 @@ public class MainWindow extends JFrame {
                 lblNewLabel.setBounds(10, 10, 500, 40);
                 contentPane.add(lblNewLabel);
 
-                btnNewButton = new JButton("Offres");
+                btnNewButton = new JButton("Categories");
                 btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                btnNewButton.setBounds(10, 50, 150, 40);
+                btnNewButton.setBounds(10, 50, 200, 40);
                 btnNewButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try {
@@ -102,9 +102,26 @@ public class MainWindow extends JFrame {
                 });
                 contentPane.add(btnNewButton);
 
+                btnNewButton = new JButton("Recommandations");
+                btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+                btnNewButton.setBounds(10, 100, 200, 40);
+                btnNewButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            dispose();
+                            RecommandationsWindow frameOffres = new RecommandationsWindow(id);
+                            frameOffres.setVisible(true);
+                        } catch (Exception er) {
+                            System.err.println("Connot charge offers");
+                            er.printStackTrace(System.err);
+                        }
+                    }
+                });
+                contentPane.add(btnNewButton);
+
                 btnNewButton = new JButton("Delete account");
                 btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                btnNewButton.setBounds(10, 100, 150, 40);
+                btnNewButton.setBounds(10, 150, 200, 40);
                 btnNewButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try {
