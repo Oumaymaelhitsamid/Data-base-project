@@ -26,8 +26,8 @@ public class ParcoursOffres extends JFrame {
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "guiziova";
-    static final String PASSWD = "guiziova";
+    static final String USER = "arvyp";
+    static final String PASSWD = "arvyp";
 
 
     /**

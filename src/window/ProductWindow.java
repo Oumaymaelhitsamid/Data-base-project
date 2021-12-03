@@ -47,7 +47,7 @@ public class ProductWindow extends JFrame{
     public ProductWindow(String accountID, String productID, int NUMBER_OF_OFFER){
         // Partie graphique...
         // Pour la fenêtre principale
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(450, 190, 1000, 300);
         setResizable(false);
         contentPane = new JPanel();
