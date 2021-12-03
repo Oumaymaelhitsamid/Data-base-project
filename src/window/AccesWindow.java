@@ -69,7 +69,7 @@ public class AccesWindow extends JFrame{
         textField.setBounds(481, 170, 281, 68);
         contentPane.add(textField);
         textField.setColumns(10);
-
+        contentPane = new JPanel();
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 32));
         passwordField.setBounds(481, 286, 281, 68);
