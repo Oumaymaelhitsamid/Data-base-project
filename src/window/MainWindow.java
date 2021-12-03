@@ -69,9 +69,9 @@ public class MainWindow extends JFrame{
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		try {
-        			    ParcoursOffres frame = new ParcoursOffres("", "");
+        			    ParcoursOffres frame = new ParcoursOffres();
                   frame.setVisible(true);
-        	        new ParcoursOffres(prenom, nom);
+        	        new ParcoursOffres();
 
         		}catch(SQLException er) {
                     System.err.println("Cannot access database or respond to the request");
