@@ -106,8 +106,10 @@ public class ParcoursOffres2 extends JFrame{
         conn2.setAutoCommit(false);
         System.out.println("connected");
 
+        final String PRE_STMT2 =
+                "SELECT intitule, idproduit from produits where nomcategorie = ? AND idproduit not in (SELECT idproduit from estremportepar )";
 
-        PreparedStatement stmt_interrogation2 = conn2.prepareStatement("SELECT intitule, idproduit from produits where nomcategorie = ?");
+        PreparedStatement stmt_interrogation2 = conn2.prepareStatement(PRE_STMT2);
 
         stmt_interrogation2.setString(1, result);
         ResultSet rset2 = stmt_interrogation2.executeQuery();
@@ -160,12 +162,6 @@ public class ParcoursOffres2 extends JFrame{
 
         };
 
-        for (String chemin : path){
-            System.out.println(chemin);
-        }
-
-        System.out.println("Le chemin est" + path.get(path.size()-1));
-
 
         // Back button
         btnNewButton = new JButton("back");
@@ -183,9 +179,6 @@ public class ParcoursOffres2 extends JFrame{
                         dispose();
                     }else{
                         ParcoursOffres2 frame = new ParcoursOffres2(path.remove(path.size()-2),path, accountID);
-                        for (String chemin : path){
-                            System.out.println(chemin);
-                        }
                         frame.setVisible(true);
                         dispose();
                     }

@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ public class ProductWindow extends JFrame{
     private JButton propositionButton;
     private JLabel label;
     private JPanel contentPane;
+    private JButton btnNewButton;
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
@@ -35,6 +37,7 @@ public class ProductWindow extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+
                     ProductWindow frame = new ProductWindow("2","2", 5);
                     frame.setVisible(true);
                 } catch (Exception e) {
@@ -234,7 +237,33 @@ public class ProductWindow extends JFrame{
             }
         });
 
+
+
+
         contentPane.add(propositionButton);
+
+        // Back button
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    ParcoursOffres frame = new ParcoursOffres(accountID);
+                    frame.setVisible(true);
+                    dispose();
+                }catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
+
+
 
         label = new JLabel("");
         label.setBounds(0, 0, 0, 0);
