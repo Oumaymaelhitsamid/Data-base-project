@@ -3,11 +3,9 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +19,6 @@ public class ProductWindow extends JFrame{
     private static final long serialVersionUID = 1L;
     private JTextField enchereField;
     private JButton propositionButton;
-    private JLabel label;
     private JPanel contentPane;
     private JButton btnNewButton;
 
@@ -30,26 +27,8 @@ public class ProductWindow extends JFrame{
     static final String USER = "arvyp";
     static final String PASSWD = "arvyp";
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-
-                    ProductWindow frame = new ProductWindow("2","2", 5);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     public ProductWindow(String accountID, String productID, int NUMBER_OF_OFFER){
-        // Partie graphique...
-        // Pour la fenêtre principale
+        // Frame
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
@@ -58,19 +37,19 @@ public class ProductWindow extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Pour le champ à remplir
+        // Auction field and text
         enchereField = new JTextField();
         enchereField.setFont(new Font("Tahoma", Font.PLAIN, 18));
         enchereField.setBounds(10, 10, 200, 40);
         contentPane.add(enchereField);
         enchereField.setColumns(10);
 
-        // Pour le bouton
+        // Button to propose a price (processing is made later)
         propositionButton = new JButton("Proposer un prix");
         propositionButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
         propositionButton.setBounds(220, 10, 200, 40);
 
-        // Pour les caractéristiques d'un produit en particulier
+        // For specific caracteristics of the product
         try{
             // Loading of the Oracle Driver
             System.out.print("Loading Oracle driver... ");
@@ -83,32 +62,35 @@ public class ProductWindow extends JFrame{
             conn.setAutoCommit(false);
             System.out.println("connected");
 
+            // Parameters of the product
             PreparedStatement stmt_graphic = conn.prepareStatement("SELECT * FROM PRODUITS WHERE idProduit = ?");
             stmt_graphic.setString(1, productID);
             ResultSet rset = stmt_graphic.executeQuery();
+            // Commit for concurrent access to the database
+            conn.commit();
 
             if(rset.next()){
-                // Pour l'intitulé du produit
+                // Name
                 JLabel lblNewLabel = new JLabel(rset.getString(2));
                 lblNewLabel.setForeground(Color.BLACK);
                 lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
                 lblNewLabel.setBounds(10, 50, 590, 40);
                 contentPane.add(lblNewLabel);
-                // Pour le prix de la dernière enchère proposée
-                JLabel prixCourant = new JLabel("Dernière enchère : " + rset.getString(3));
-                prixCourant.setForeground(Color.BLACK);
-                prixCourant.setBackground(Color.CYAN);
-                prixCourant.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                prixCourant.setBounds(10, 90, 590, 40);
-                contentPane.add(prixCourant);
-                // Pour la description du produit
+                // Last price
+                JLabel listPrice = new JLabel("Dernière enchère : " + rset.getString(3));
+                listPrice.setForeground(Color.BLACK);
+                listPrice.setBackground(Color.CYAN);
+                listPrice.setFont(new Font("Tahoma", Font.PLAIN, 18));
+                listPrice.setBounds(10, 90, 590, 40);
+                contentPane.add(listPrice);
+                // Description
                 JLabel description = new JLabel("Description : " + rset.getString(4));
                 description.setForeground(Color.BLACK);
                 description.setBackground(Color.CYAN);
                 description.setFont(new Font("Tahoma", Font.PLAIN, 18));
                 description.setBounds(10, 130, 590, 40);
                 contentPane.add(description);
-                // Pour l'URL d'une photo
+                // URL
                 JLabel url = new JLabel("URL photo : " + rset.getString(5));
                 url.setForeground(Color.BLACK);
                 url.setBackground(Color.CYAN);
@@ -116,23 +98,32 @@ public class ProductWindow extends JFrame{
                 url.setBounds(10, 170, 590, 40);
                 contentPane.add(url);
             }
+            stmt_graphic.close();
+            rset.close();
 
+
+            // Select all the caracteristics of a certain product
             PreparedStatement stmt_graphic2 = conn.prepareStatement("SELECT caracteristique, valeurCarac FROM CARACTERISTIQUES WHERE idProduit = ?");
             stmt_graphic2.setString(1, productID);
             ResultSet rset2 = stmt_graphic2.executeQuery();
+            // Commit for concurrent access to the database
+            conn.commit();
 
-            int cpt = 0;
+            // Print them
+            int position = 0;
             while(rset2.next()){
-                JLabel carac = new JLabel(rset2.getString(1) + " : " + rset2.getString(2) + ", ");
+                JLabel carac = new JLabel(rset2.getString(1) + " : " + rset2.getString(2));
                 carac.setForeground(Color.BLACK);
                 carac.setBackground(Color.CYAN);
                 carac.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                carac.setBounds(10 + cpt * 150, 210, 200, 40);
+                carac.setBounds(10 + position * 100, 210, 200, 40);
                 contentPane.add(carac);
-                cpt = cpt + 1;
+                position = position + 1;
             }
 
-            stmt_graphic.close();
+            stmt_graphic2.close();
+            rset2.close();
+            conn.close();
 
         } catch (SQLException er) {
 
@@ -145,7 +136,7 @@ public class ProductWindow extends JFrame{
         propositionButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                // Parsing of the date
+                // Date of the offer
                 String date = LocalDate.now().toString();
                 String time = LocalTime.now().toString();
                 System.out.println(time);
@@ -181,6 +172,7 @@ public class ProductWindow extends JFrame{
                         System.out.println("Your proposition must be higher than the previous one.");
                     }
                     else{
+                        // Verify if the product is already bought
                         PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT * FROM ESTREMPORTEPAR WHERE idProduit = ?");
                         stmt_interrogation.setString(1, productID);
                         ResultSet rset_interrogation = stmt_interrogation.executeQuery();
@@ -191,6 +183,7 @@ public class ProductWindow extends JFrame{
                             PreparedStatement stmt_interrogation2 = conn.prepareStatement("SELECT COUNT(*) FROM OFFRES WHERE idProduit = ?");
                             stmt_interrogation2.setString(1, productID);
                             ResultSet rset_interrogation2 = stmt_interrogation2.executeQuery();
+                            // Insert into estremportepar if the offer is the NUMBER_OF_OFFERth
                             if (rset_interrogation2.next()){
                                 int offerNumber = Integer.parseInt(rset_interrogation2.getString(1)) + 1;
                                 if(offerNumber == NUMBER_OF_OFFER){
@@ -203,7 +196,9 @@ public class ProductWindow extends JFrame{
                                     conn.commit();
                                 }
                             }
-
+                            stmt_interrogation2.close();
+                            rset_interrogation2.close();
+                            // Insertion of the offer
                             PreparedStatement stmt_insertion2 = conn.prepareStatement("INSERT INTO OFFRES VALUES (?, ?, ?, ?, ?)");
                             stmt_insertion2.setString(1, productID);
                             stmt_insertion2.setString(2, date);
@@ -211,12 +206,14 @@ public class ProductWindow extends JFrame{
                             stmt_insertion2.setString(4, priceProposed);
                             stmt_insertion2.setString(5, accountID);
                             stmt_insertion2.executeQuery();
+                            stmt_insertion2.close();
+                            // Update of the current price
+                            PreparedStatement stmt_update = conn.prepareStatement("UPDATE PRODUITS SET prixCourant = ? WHERE idProduit = ?");
+                            stmt_update.setString(1, priceProposed);
+                            stmt_update.setString(2, productID);
+                            stmt_update.executeQuery();
+                            stmt_update.close();
 
-                            PreparedStatement stmt_insertion3 = conn.prepareStatement("UPDATE PRODUITS SET prixCourant = ? WHERE idProduit = ?");
-                            stmt_insertion3.setString(1, priceProposed);
-                            stmt_insertion3.setString(2, productID);
-                            stmt_insertion3.executeQuery();
-                            stmt_insertion3.close();
 
                             conn.commit();
                             System.out.println("Your proposition is accepted");
@@ -224,22 +221,21 @@ public class ProductWindow extends JFrame{
                             ProductWindow frame = new ProductWindow(accountID, productID, NUMBER_OF_OFFER);
                             frame.setVisible(true);
                         }
+                        stmt_interrogation.close();
+                        rset_interrogation.close();
                     }
+                    stmt_verif1.close();
+                    stmt_verif2.close();
+                    rset_verif1.close();
+                    rset_verif2.close();
                     conn.close();
-
-
                 } catch (SQLException er) {
-
                     System.err.println("Cannot connect to the database or cannot add the offer");
                     er.printStackTrace(System.err);
                 }
 
             }
         });
-
-
-
-
         contentPane.add(propositionButton);
 
         // Back button
@@ -252,7 +248,7 @@ public class ProductWindow extends JFrame{
 
             public void actionPerformed(ActionEvent e) {
                 try{
-                    ParcoursOffres frame = new ParcoursOffres(accountID);
+                    ParcoursOffres frame = new ParcoursOffres(accountID, NUMBER_OF_OFFER);
                     frame.setVisible(true);
                     dispose();
                 }catch (Exception ee) {
@@ -262,12 +258,6 @@ public class ProductWindow extends JFrame{
             }
 
         });
-
-
-
-        label = new JLabel("");
-        label.setBounds(0, 0, 0, 0);
-        contentPane.add(label);
     }
 
 

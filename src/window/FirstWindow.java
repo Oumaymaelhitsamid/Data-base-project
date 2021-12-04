@@ -1,21 +1,13 @@
 package window;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 public class FirstWindow extends JFrame{
 
@@ -23,32 +15,10 @@ public class FirstWindow extends JFrame{
     private static final long serialVersionUID = 1L;
     private JButton btnNewButton;
     private JButton btnNewButton2;
-    private JLabel label;
     private JPanel contentPane;
 
-    // For database
-    static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "arvyp";
-    static final String PASSWD = "arvyp";
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AccesWindow frame = new AccesWindow();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public FirstWindow(){
-
+    public FirstWindow(int NUMBER_OF_OFFER){
+        // Frame
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
@@ -57,43 +27,42 @@ public class FirstWindow extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Welcome");
+        // Text
+        JLabel lblNewLabel = new JLabel("Bienvenue");
         lblNewLabel.setForeground(Color.BLACK);
         lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         lblNewLabel.setBounds(10, 10, 150, 40);
         contentPane.add(lblNewLabel);
 
-        btnNewButton = new JButton("Login");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        // Button if the user already has an account
+        btnNewButton = new JButton("Se connecter");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnNewButton.setBounds(10, 50, 150, 40);
 
         btnNewButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                AccesWindow accessWindow = new AccesWindow();
+                AccesWindow accessWindow = new AccesWindow(NUMBER_OF_OFFER);
                 accessWindow.setVisible(true);
             }
         });
         contentPane.add(btnNewButton);
 
-        btnNewButton2 = new JButton("Register");
-        btnNewButton2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        // Button to create an account
+        btnNewButton2 = new JButton("S'inscrire");
+        btnNewButton2.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnNewButton2.setBounds(10, 100, 150, 40);
 
         btnNewButton2.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                CreateAccountWindow createAccountWindow = new CreateAccountWindow();
+                CreateAccountWindow createAccountWindow = new CreateAccountWindow(NUMBER_OF_OFFER);
                 createAccountWindow.setVisible(true);
             }
         });
         contentPane.add(btnNewButton2);
-
-        label = new JLabel("");
-        label.setBounds(0, 0, 8, 2);
-        contentPane.add(label);
     }
 
 

@@ -43,23 +43,7 @@ public class RecommandationsWindow extends JFrame{
     }
 
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    RecommandationsWindow frame = new RecommandationsWindow("2");
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public RecommandationsWindow(String accountID) throws SQLException {
+    public RecommandationsWindow(String accountID, int NUMBER_OF_OFFER) throws SQLException {
 
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,13 +55,13 @@ public class RecommandationsWindow extends JFrame{
         contentPane.setLayout(null);
 
         // Recommandations générales
-        recommandationsPersonnelles(accountID);
+        recommandationsPersonnelles(accountID, NUMBER_OF_OFFER);
 
         // Recommandations personnelles
-        recommandationsGenerales(accountID);
+        recommandationsGenerales(accountID, NUMBER_OF_OFFER);
     }
 
-    private void recommandationsGenerales(String accountID){
+    private void recommandationsGenerales(String accountID, int NUMBER_OF_OFFER){
         try{
             JLabel lblNewLabel = new JLabel("Recommandations générales :");
             lblNewLabel.setForeground(Color.BLACK);
@@ -155,7 +139,7 @@ public class RecommandationsWindow extends JFrame{
                     public void actionPerformed(ActionEvent e) {
                         try{
                             dispose();
-                            ParcoursOffres2 parcours = new ParcoursOffres2(mp.getKey().toString(), new ArrayList<String>(), accountID);
+                            ParcoursOffres2 parcours = new ParcoursOffres2(mp.getKey().toString(), new ArrayList<String>(), accountID, NUMBER_OF_OFFER);
                             parcours.setVisible(true);
                         }   catch (Exception ee) {
                             ee.printStackTrace();
@@ -171,7 +155,7 @@ public class RecommandationsWindow extends JFrame{
         }
     }
 
-    private void recommandationsPersonnelles(String accountID){
+    private void recommandationsPersonnelles(String accountID, int NUMBER_OF_OFFER){
         try{
             JLabel lblNewLabel = new JLabel("Recommandations personnelles :");
             lblNewLabel.setForeground(Color.BLACK);
@@ -199,7 +183,6 @@ public class RecommandationsWindow extends JFrame{
             ResultSet rset_cat;
             TreeMap<String, Float> categories = new TreeMap<String, Float>();
             while(rset_interrogation.next()){
-                System.out.println("3");
                 stmt_cat = conn.prepareStatement("SELECT nomCategorie FROM PRODUITS WHERE idProduit = ?");
                 stmt_cat.setString(1, rset_interrogation.getString(1));
                 rset_cat = stmt_cat.executeQuery();
@@ -235,7 +218,7 @@ public class RecommandationsWindow extends JFrame{
 
                     public void actionPerformed(ActionEvent e) {
                         try{
-                            ParcoursOffres2 parcours = new ParcoursOffres2(mp.getKey().toString(), new ArrayList<String>(), accountID);
+                            ParcoursOffres2 parcours = new ParcoursOffres2(mp.getKey().toString(), new ArrayList<String>(), accountID, NUMBER_OF_OFFER);
                             parcours.setVisible(true);
                         }   catch (Exception ee) {
                             ee.printStackTrace();
@@ -261,7 +244,7 @@ public class RecommandationsWindow extends JFrame{
 
             public void actionPerformed(ActionEvent e) {
                 try {
-                    MainWindow frame = new MainWindow(accountID);
+                    MainWindow frame = new MainWindow(accountID, NUMBER_OF_OFFER);
                     frame.setVisible(true);
                     dispose();
                 } catch (Exception ee) {
