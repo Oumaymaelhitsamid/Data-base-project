@@ -1,33 +1,23 @@
 
 INSERT INTO CATEGORIES VALUES ('Livre');
-
 INSERT INTO CATEGORIES VALUES ('BD');
-
 INSERT INTO CATEGORIES VALUES ('Roman');
-
 INSERT INTO CATEGORIES VALUES ('Console');
-
 INSERT INTO CATEGORIES VALUES ('Voiture');
-
 INSERT INTO CATEGORIES VALUES ('Voiture de sport');
-
 INSERT INTO CATEGORIES VALUES ('Bugatti');
 
 
 
 INSERT INTO APOURMERE VALUES ('BD', 'Livre');
-
 INSERT INTO APOURMERE VALUES ('Roman', 'Livre');
-
 INSERT INTO APOURMERE VALUES ('Bugatti', 'Voiture de sport');
-
 INSERT INTO APOURMERE VALUES ('Voiture de sport', 'Voiture');
 
 
 
 
-INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console sortie en 2005, vendu plus de 25 millions de fois en Europe', 'https://www.cdiscount.com/pdt2/8/5/9/1/700x700/0882224035859/rw/console-xbox-360-premium.jpg',
-'Console');
+INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console sortie en 2005, vendu plus de 25 millions de fois en Europe', 'https://www.cdiscount.com/pdt2/8/5/9/1/700x700/0882224035859/rw/console-xbox-360-premium.jpg', 'Console');
 
 INSERT INTO PRODUITS VALUES ('2', 'Playstation 5', '300', 'console sortie en 2020 par Sony Interactive Entertainement', 'https://www.journaldugeek.com/content/uploads/2021/09/template-jdg-2021-09-14t154227-127.jpg', 'Console');
 
@@ -51,7 +41,7 @@ INSERT INTO PRODUITS VALUES ('8', 'Bugatti veyron', '2 500 000', 'Occasion en pa
 
 INSERT INTO CARACTERISTIQUES VALUES ('1', 'poids', '6 Kg');
 
-INSERT INTO CARACTERISTIQUES VALUES ('2', 'couleur', 'noir');
+INSERT INTO CARACTERISTIQUES VALUES ('1', 'couleur', 'noir');
 
 INSERT INTO CARACTERISTIQUES VALUES ('2', 'poids', '4 Kg');
 
