@@ -33,7 +33,7 @@ public class CreateTable {
             "idUtilisateur INT NOT NULL, PRIMARY KEY(idProduit, dateOffre, heureOffre))";
     static final String CREATE_UTILISATEURS = "CREATE TABLE UTILISATEURS(idUtilisateur INT PRIMARY KEY)";
     static final String CREATE_COMPTES = "CREATE TABLE COMPTES(idUtilisateur INT PRIMARY KEY," +
-            "email varchar(40) NOT NULL," +
+            "email varchar(40) UNIQUE NOT NULL," +
             "mdp varchar(20) CHECK(length(mdp)>7)," +
             "nom varchar(20) NOT NULL," +
             "prenom varchar(20) NOT NULL," +

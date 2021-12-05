@@ -68,7 +68,7 @@ public class AccesWindow extends JFrame{
         contentPane.add(lblPassword);
 
         // Button to connect (interacts with database to assure the account exists)
-        btnNewButton = new JButton("Connection");
+        btnNewButton = new JButton("Connexion");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
         btnNewButton.setBounds(10, 110, 350, 40);
 

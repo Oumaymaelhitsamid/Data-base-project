@@ -14,7 +14,6 @@ public class ParcoursOffres2 extends JFrame{
     private static final long serialVersionUID = 1L;
     private JButton btnNewButton;
     private JPanel contentPane;
-    int cpt = 0;
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
@@ -124,6 +123,7 @@ public class ParcoursOffres2 extends JFrame{
         stmt_interrogation2.close();
         conn2.close();
 
+        int cpt = 0;
         for (String result2 : results2){
             cpt += 1;
             btnNewButton = new JButton(result2);
@@ -131,12 +131,14 @@ public class ParcoursOffres2 extends JFrame{
             btnNewButton.setBounds(10 + (140 * position) % 600, 50 + 40 * (position / 4), 135, 40);
             contentPane.add(btnNewButton);
             position += 1;
+
+            int finalCpt = cpt;
             btnNewButton.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
                     try {
                         path.add(result2);
-                        ProductWindow product = new ProductWindow(accountID, idProd.get(cpt-1), 5);
+                        ProductWindow product = new ProductWindow(accountID, idProd.get(finalCpt-1), NUMBER_OF_OFFER);
                         product.setVisible(true);
                         dispose();
                     } catch (Exception ee) {
