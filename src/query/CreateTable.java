@@ -6,8 +6,8 @@ import java.util.Calendar;
 public class CreateTable {
     // Pour se connecter à la base de données :
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "arvyp";
-    static final String PASSWD = "arvyp";
+    static final String USER = "guiziova";
+    static final String PASSWD = "guiziova";
 
     // Assure que les tables n'existes pas:
     static final String DROP_PRODUITS = "DROP TABLE PRODUITS";
@@ -23,7 +23,7 @@ public class CreateTable {
     static final String CREATE_PRODUITS = "CREATE TABLE PRODUITS(idProduit INT PRIMARY KEY, intitule char(50) NOT NULL," +
             "prixCourant FLOAT CHECK(prixCourant>0)," +
             "description char(100) NOT NULL," +
-            "urlPhoto char(50)," +
+            "urlPhoto char(200)," +
             "nomCategorie char(30) NOT NULL)";
     static final String CREATE_CATEGORIES = "CREATE TABLE CATEGORIES(nomCategorie char(30) PRIMARY KEY)";
     static final String CREATE_OFFRES = "CREATE TABLE OFFRES(idProduit int," +
