@@ -22,13 +22,12 @@ public class CreateAccountWindow extends JFrame{
     // Graphical elements
     private static final long serialVersionUID = 1L;
     private JTextField emailField;
-    private JTextField prenomField;
-    private JTextField nomField;
+    private JTextField surnameField;
+    private JTextField nameField;
     private JTextField adresseField;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
     private JButton btnNewButton;
-    private JLabel label;
     private JPanel contentPane;
 
     // For database
@@ -36,25 +35,9 @@ public class CreateAccountWindow extends JFrame{
     static final String USER = "arvyp";
     static final String PASSWD = "arvyp";
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CreateAccountWindow frame = new CreateAccountWindow();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public CreateAccountWindow(){
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public CreateAccountWindow(int NUMBER_OF_OFFER){
+        // Frame
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -62,38 +45,42 @@ public class CreateAccountWindow extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Create an account");
+        // Text
+        JLabel lblNewLabel = new JLabel("Créer un compte");
         lblNewLabel.setForeground(Color.BLACK);
         lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
         lblNewLabel.setBounds(10, 10, 800, 40);
         contentPane.add(lblNewLabel);
 
-        prenomField = new JTextField();
-        prenomField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        prenomField.setBounds(250, 60, 280, 40);
-        contentPane.add(prenomField);
-        prenomField.setColumns(10);
+        // Field for surname + Text
+        surnameField = new JTextField();
+        surnameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        surnameField.setBounds(250, 60, 280, 40);
+        contentPane.add(surnameField);
+        surnameField.setColumns(10);
 
-        JLabel lblPrenom = new JLabel("Prenom");
-        lblPrenom.setBackground(Color.BLACK);
-        lblPrenom.setForeground(Color.BLACK);
-        lblPrenom.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblPrenom.setBounds(10, 60, 240, 40);
-        contentPane.add(lblPrenom);
+        JLabel lblSurname = new JLabel("Prenom");
+        lblSurname.setBackground(Color.BLACK);
+        lblSurname.setForeground(Color.BLACK);
+        lblSurname.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblSurname.setBounds(10, 60, 240, 40);
+        contentPane.add(lblSurname);
 
-        nomField = new JTextField();
-        nomField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        nomField.setBounds(250, 110, 280, 40);
-        contentPane.add(nomField);
-        nomField.setColumns(20);
+        // Field for name + Text
+        nameField = new JTextField();
+        nameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        nameField.setBounds(250, 110, 280, 40);
+        contentPane.add(nameField);
+        nameField.setColumns(20);
 
-        JLabel lblNom = new JLabel("Nom");
-        lblNom.setBackground(Color.BLACK);
-        lblNom.setForeground(Color.BLACK);
-        lblNom.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblNom.setBounds(10, 110, 240, 40);
-        contentPane.add(lblNom);
+        JLabel lblName = new JLabel("Nom");
+        lblName.setBackground(Color.BLACK);
+        lblName.setForeground(Color.BLACK);
+        lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblName.setBounds(10, 110, 240, 40);
+        contentPane.add(lblName);
 
+        // Field for the adresse + Text
         adresseField = new JTextField();
         adresseField.setFont(new Font("Tahoma", Font.PLAIN, 18));
         adresseField.setBounds(250, 160, 280, 40);
@@ -107,6 +94,7 @@ public class CreateAccountWindow extends JFrame{
         lblAdresse.setBounds(10, 160, 240, 40);
         contentPane.add(lblAdresse);
 
+        // Field for email + Text
         emailField = new JTextField();
         emailField.setFont(new Font("Tahoma", Font.PLAIN, 18));
         emailField.setBounds(250, 210, 280, 40);
@@ -120,31 +108,34 @@ public class CreateAccountWindow extends JFrame{
         lblEmail.setBounds(10, 210, 240, 40);
         contentPane.add(lblEmail);
 
+        // Field for password + Text
         passwordField1 = new JPasswordField();
         passwordField1.setFont(new Font("Tahoma", Font.PLAIN, 18));
         passwordField1.setBounds(250, 260, 280, 40);
         contentPane.add(passwordField1);
 
-        JLabel lblPassword = new JLabel("Password");
+        JLabel lblPassword = new JLabel("Mot de passe");
         lblPassword.setForeground(Color.BLACK);
         lblPassword.setBackground(Color.CYAN);
         lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblPassword.setBounds(10, 260, 240, 40);
         contentPane.add(lblPassword);
 
+        // Field for password confirmation + Text
         passwordField2 = new JPasswordField();
         passwordField2.setFont(new Font("Tahoma", Font.PLAIN, 18));
         passwordField2.setBounds(250, 310, 280, 40);
         contentPane.add(passwordField2);
 
-        JLabel lblPasswordC = new JLabel("Confirm");
+        JLabel lblPasswordC = new JLabel("Confirmer");
         lblPasswordC.setForeground(Color.BLACK);
         lblPasswordC.setBackground(Color.CYAN);
         lblPasswordC.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblPasswordC.setBounds(10, 310, 240, 40);
         contentPane.add(lblPasswordC);
 
-        btnNewButton = new JButton("Create");
+        // Button which interacts with database to add the new account (if it is correct)
+        btnNewButton = new JButton("S'inscrire");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
         btnNewButton.setBounds(10, 360, 520, 40);
 
@@ -156,8 +147,8 @@ public class CreateAccountWindow extends JFrame{
                 if (password.length() <= 7){
                     System.out.println("The length of the password must be > 7");
                 }
-                else if (password.equals(confirm) && emailField.getText().length() != 0 && nomField.getText().length() != 0
-                    && prenomField.getText().length() != 0 && adresseField.getText().length() != 0){
+                else if (password.equals(confirm) && emailField.getText().length() != 0 && nameField.getText().length() != 0
+                    && surnameField.getText().length() != 0 && adresseField.getText().length() != 0){
                     try{
                         // Loading of the Oracle Driver
                         System.out.print("Loading Oracle driver... ");
@@ -170,6 +161,7 @@ public class CreateAccountWindow extends JFrame{
                         conn.setAutoCommit(false);
                         System.out.println("connected");
 
+                        // Get the max from Utilisateurs
                         PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT COUNT(*) FROM UTILISATEURS");
                         ResultSet rset_interrogation = stmt_interrogation.executeQuery();
                         if (rset_interrogation.next()){
@@ -179,8 +171,8 @@ public class CreateAccountWindow extends JFrame{
                             stmt_insertion.setString(1, newUser);
                             stmt_insertion.setString(2, emailField.getText());
                             stmt_insertion.setString(3, password);
-                            stmt_insertion.setString(4, nomField.getText());
-                            stmt_insertion.setString(5, prenomField.getText());
+                            stmt_insertion.setString(4, nameField.getText());
+                            stmt_insertion.setString(5, surnameField.getText());
                             stmt_insertion.setString(6, adresseField.getText());
                             stmt_insertion.executeQuery();
                             stmt_insertion.close();
@@ -197,8 +189,8 @@ public class CreateAccountWindow extends JFrame{
                         rset_interrogation.close();
                         conn.close();
 
-                        setVisible(false);
-                        FirstWindow firstFrame = new FirstWindow();
+                        dispose();
+                        FirstWindow firstFrame = new FirstWindow(NUMBER_OF_OFFER);
                         firstFrame.setVisible(true);
 
                     }   catch (SQLException er) {
@@ -208,11 +200,29 @@ public class CreateAccountWindow extends JFrame{
                 }
             }
         });
-
         contentPane.add(btnNewButton);
-        label = new JLabel("");
-        label.setBounds(0, 0, 1008, 562);
-        contentPane.add(label);
+
+        // Back button and processing
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    FirstWindow frame = new FirstWindow(NUMBER_OF_OFFER);
+                    frame.setVisible(true);
+                    dispose();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
     }
 
 

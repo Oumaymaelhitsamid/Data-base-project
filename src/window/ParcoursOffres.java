@@ -1,5 +1,7 @@
 package window;
 
+import com.sun.tools.javac.Main;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,55 +13,34 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
-public class ParcoursOffres extends JFrame{
-	
-	// Graphical elements
+public class ParcoursOffres extends JFrame {
+
+    // Graphical elements
     private static final long serialVersionUID = 1L;
-    private JTextField textField;
-    private JPasswordField passwordField;
     private JButton btnNewButton;
-    private JLabel label;
     private JPanel contentPane;
-    private String accountID;
-    
- // For database
+    private ArrayList<String> path = new ArrayList<String>();
+
+    // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "guiziova";
-    static final String PASSWD = "guiziova";
+    static final String USER = "arvyp";
+    static final String PASSWD = "arvyp";
 
-   
-	/**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ParcoursOffres frame = new ParcoursOffres("", "");
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    
-    public ParcoursOffres(String prenom, String nom) throws SQLException {
-
-        accountID = null;
-    	
-    	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(450, 190, 1014, 597);
+    public ParcoursOffres(String accountID, int NUMBER_OF_OFFER) throws SQLException {
+        // Frame
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Text
         JLabel lblNewLabel = new JLabel("Choisissez une catégorie de produits");
         lblNewLabel.setForeground(Color.BLACK);
-        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 46));
-        lblNewLabel.setBounds(150, 13, 800, 93);
+        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        lblNewLabel.setBounds(15, 15, 500, 40);
         contentPane.add(lblNewLabel);
 
         // Loading of the Oracle Driver
@@ -73,12 +54,15 @@ public class ParcoursOffres extends JFrame{
         conn.setAutoCommit(false);
         System.out.println("connected");
 
+        // Select each category without mother
         PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT NOMCATEGORIE FROM CATEGORIES MINUS SELECT NOMCATEGORIEFILLE from APOURMERE");
         ResultSet rset = stmt_interrogation.executeQuery();
+        // Commit for concurrent access to the database
         conn.commit();
         ArrayList<String> results = new ArrayList<String>();
 
-        while (rset.next()){
+        // Add the different categories without mother to the ArrayList
+        while (rset.next()) {
             results.add(rset.getString(1));
         }
 
@@ -86,28 +70,57 @@ public class ParcoursOffres extends JFrame{
         stmt_interrogation.close();
         conn.close();
 
+        // Add a button for each category selected previously
         int position = 0;
-        for (String result : results){
+        for (String result : results) {
             btnNewButton = new JButton(result);
-            btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-            btnNewButton.setBounds(50 + (200*position)%800, 100 + 100*(position/5), 162, 73);
+            btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            btnNewButton.setBounds(10 + (140 * position) % 600, 50 + 40 * (position / 4), 135, 40);
             contentPane.add(btnNewButton);
             position += 1;
 
             btnNewButton.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
-                    try{
-                        ParcoursOffres2 parcours = new ParcoursOffres2(result, "");
-                        parcours.setVisible(true);
-                    }   catch (Exception ee) {
+                    try {
+                        // path to move back in the application
+                        path.add(result);
+                        // new frame for daughters
+                        ParcoursOffres2 daughters = new ParcoursOffres2(result, path, accountID, NUMBER_OF_OFFER);
+                        daughters.setVisible(true);
+                        dispose();
+                    } catch (Exception ee) {
                         ee.printStackTrace();
                     }
 
                 }
 
             });
-
         }
+
+        // Back button and processing
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    MainWindow frame = new MainWindow(accountID, NUMBER_OF_OFFER);
+                    frame.setVisible(true);
+                    dispose();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
+
+
     }
 }
+

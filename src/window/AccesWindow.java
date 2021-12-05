@@ -24,33 +24,16 @@ public class AccesWindow extends JFrame{
     private JTextField textField;
     private JPasswordField passwordField;
     private JButton btnNewButton;
-    private JLabel label;
     private JPanel contentPane;
 
     // For database
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
     static final String USER = "arvyp";
     static final String PASSWD = "arvyp";
- 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AccesWindow frame = new AccesWindow();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
-    public AccesWindow(){
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public AccesWindow(int NUMBER_OF_OFFER){
+        // Frame
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(15, 15, 600, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -58,6 +41,7 @@ public class AccesWindow extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Email text and field
         JLabel lblNewLabel = new JLabel("Email");
         lblNewLabel.setForeground(Color.BLACK);
         lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -70,19 +54,21 @@ public class AccesWindow extends JFrame{
         contentPane.add(textField);
         textField.setColumns(10);
 
+        // Password text and field
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
         passwordField.setBounds(110, 60, 250, 40);
         contentPane.add(passwordField);
 
-        JLabel lblPassword = new JLabel("Password");
+        JLabel lblPassword = new JLabel("Mdp");
         lblPassword.setForeground(Color.BLACK);
         lblPassword.setBackground(Color.CYAN);
         lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblPassword.setBounds(10, 60, 100, 40);
         contentPane.add(lblPassword);
 
-        btnNewButton = new JButton("Login");
+        // Button to connect (interacts with database to assure the account exists)
+        btnNewButton = new JButton("Connexion");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
         btnNewButton.setBounds(10, 110, 350, 40);
 
@@ -103,15 +89,16 @@ public class AccesWindow extends JFrame{
                     conn.setAutoCommit(false);
                     System.out.println("connected");
 
+                    // Verify if the mdp and email are matching. Select also the userID for next frames
                     PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT mdp, idUtilisateur FROM COMPTES WHERE email = ?");
                     stmt_interrogation.setString(1, userName);
                     ResultSet rset = stmt_interrogation.executeQuery();
+                    // Commit for concurrent access to the database
                     conn.commit();
                     if (rset.next() && rset.getString(1).equals(password)){
                         try {
-                            setVisible(false);
-                            System.out.println(rset.getString(2));
-                            MainWindow mainFrame = new MainWindow(rset.getString(2));
+                            dispose();
+                            MainWindow mainFrame = new MainWindow(rset.getString(2), NUMBER_OF_OFFER);
                             mainFrame.setVisible(true);
                         } catch (Exception er) {
                             er.printStackTrace();
@@ -133,9 +120,27 @@ public class AccesWindow extends JFrame{
 
         contentPane.add(btnNewButton);
 
-        label = new JLabel("");
-        label.setBounds(0, 0, 1008, 562);
-        contentPane.add(label);
+        // Back button
+        btnNewButton = new JButton("back");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        btnNewButton.setBounds(500, 10, 70, 40);
+        contentPane.add(btnNewButton);
+
+
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    FirstWindow frame = new FirstWindow(NUMBER_OF_OFFER);
+                    frame.setVisible(true);
+                    dispose();
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+
+            }
+
+        });
     }
 
 

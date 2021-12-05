@@ -19,7 +19,7 @@ public class InsertTuples {
             "INSERT INTO CATEGORIES VALUES ('Livre')",
             "INSERT INTO CATEGORIES VALUES ('BD')",
             "INSERT INTO CATEGORIES VALUES ('Roman')",
-            "INSERT INTO CATEGORIES VALUES ('Consoles')",
+            "INSERT INTO CATEGORIES VALUES ('Console')",
             "INSERT INTO APOURMERE VALUES ('BD', 'Livre')",
             "INSERT INTO APOURMERE VALUES ('Roman', 'Livre')",
             "INSERT INTO COMPTES VALUES ('1', 'alanfoiré@gmail.com', 'alanfoiré', 'foiré', 'alan', '2 rue Belgrade Belgique')",
