@@ -10,7 +10,7 @@ DROP TABLE ESTREMPORTEPAR;
 CREATE TABLE PRODUITS(idProduit INT PRIMARY KEY, intitule char(50) NOT NULL,
             prixCourant FLOAT CHECK(prixCourant>0),
             description char(100) NOT NULL,
-            urlPhoto char(50),
+            urlPhoto char(200),
             nomCategorie char(30) NOT NULL);
             
             
