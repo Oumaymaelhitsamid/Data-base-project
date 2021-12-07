@@ -39,6 +39,6 @@ CREATE TABLE CARACTERISTIQUES(idProduit int,
 CREATE TABLE aPourMere(nomCategorieFille char(30) PRIMARY KEY,
             nomCategorieMere char(30));
 
-CREATE TABLE estRemportePar(idProduit INT,
+CREATE TABLE estRemportePar(idProduit INT PRIMARY KEY,
             dateOffre varchar(8),
             heureOffre varchar(6));
