@@ -154,6 +154,7 @@ public class ProductWindow extends JFrame{
                     System.out.println("connected");
 
                     // Price Proposed by the user
+                    conn.beginRequest();
                     String priceProposed = enchereField.getText();
 
                     PreparedStatement stmt_verif1 = conn.prepareStatement("SELECT idUtilisateur FROM OFFRES WHERE idProduit = ? AND prixPropose = (SELECT MAX(prixPropose) FROM OFFRES WHERE idProduit = ?)");
@@ -168,10 +169,12 @@ public class ProductWindow extends JFrame{
                     if(rset_verif1.next() && rset_verif1.getString(1).equals(accountID)){
                         PopUp info = new PopUp("La dernière enchère pour ce produit est déjà la votre.");
                         info.setVisible(true);
+                        conn.rollback();
                     }
                     else if(rset_verif2.next() && Integer.parseInt(rset_verif2.getString(1)) >= Integer.parseInt(priceProposed)){
                         PopUp info2 = new PopUp("Le montant de votre proposition doit être plus haut que la dernière proposition");
                         info2.setVisible(true);
+                        conn.rollback();
                     }
                     else{
                         // Verify if the product is already bought
@@ -181,6 +184,7 @@ public class ProductWindow extends JFrame{
 
                         if(rset_interrogation.next()){
                             System.out.println("The product is already bought");
+                            conn.rollback();
                         } else {
                             PreparedStatement stmt_interrogation2 = conn.prepareStatement("SELECT COUNT(*) FROM OFFRES WHERE idProduit = ?");
                             stmt_interrogation2.setString(1, productID);
@@ -195,7 +199,6 @@ public class ProductWindow extends JFrame{
                                     stmt_insertion.setString(3, time);
                                     stmt_insertion.executeQuery();
                                     stmt_insertion.close();
-                                    conn.commit();
                                     PopUp victory = new PopUp("Bravo, vous avez remporté ce produit !");
                                     victory.setVisible(true);
                                 }

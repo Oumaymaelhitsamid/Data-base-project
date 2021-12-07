@@ -166,6 +166,7 @@ public class CreateAccountWindow extends JFrame{
                         PreparedStatement stmt_interrogation = conn.prepareStatement("SELECT COUNT(*) FROM UTILISATEURS");
                         ResultSet rset_interrogation = stmt_interrogation.executeQuery();
                         if (rset_interrogation.next()){
+                            conn.beginRequest();
                             String newUser = Integer.toString(rset_interrogation.getInt(1) + 1);
                             // Insertion in COMPTES
                             PreparedStatement stmt_insertion = conn.prepareStatement("INSERT INTO COMPTES VALUES (?, ?, ?, ?, ?, ?)");

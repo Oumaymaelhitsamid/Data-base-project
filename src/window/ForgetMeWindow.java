@@ -75,6 +75,7 @@ public class ForgetMeWindow extends JFrame {
                 System.out.println("connected");
 
                 // Delete the account of the user
+                conn.beginRequest();
                 PreparedStatement stmt_interrogation = conn.prepareStatement("DELETE FROM COMPTES WHERE idUtilisateur = ?");
                 stmt_interrogation.setString(1, userID);
                 stmt_interrogation.executeQuery();
