@@ -6,10 +6,10 @@ import java.util.Calendar;
 public class InsertTuples {
     // Pour se connecter à la base de données :
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "arvyp";
-    static final String PASSWD = "arvyp";
+    static final String USER = "guiziova";
+    static final String PASSWD = "guiziova";
 
-    private int N = 45;
+    private int N = 59;
     private static String[] insertions = new String[]{
             "INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console sortie en 2005, vendu plus de 25 millions de fois en Europe', 'https://www.cdiscount.com/pdt2/8/5/9/1/700x700/0882224035859/rw/console-xbox-360-premium.jpg', 'Console')",
             "INSERT INTO PRODUITS VALUES ('2', 'Playstation 5', '300', 'console sortie en 2020 par Sony Interactive Entertainement', 'https://www.journaldugeek.com/content/uploads/2021/09/template-jdg-2021-09-14t154227-127.jpg', 'Console')",
@@ -38,6 +38,7 @@ public class InsertTuples {
             "INSERT INTO CATEGORIES VALUES ('Monnaies')",
             "INSERT INTO CATEGORIES VALUES ('Pendules')",
             "INSERT INTO CATEGORIES VALUES ('Montres')",
+
             
             "INSERT INTO APOURMERE VALUES ('BD', 'Livre')",
             "INSERT INTO APOURMERE VALUES ('Roman', 'Livre')",
@@ -74,6 +75,12 @@ public class InsertTuples {
             "INSERT INTO CARACTERISTIQUES VALUES ('7', 'Puisssance fiscale', '5 CV')",
             "INSERT INTO CARACTERISTIQUES VALUES ('8', 'Puisssance', '1001 ch')",
             "INSERT INTO CARACTERISTIQUES VALUES ('8', 'Puisssance fiscale', '119 CV')",
+            
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '15h34', '10100', '1')",
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '20h56', '10250', '2')",
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '9h18', '10325', '3')",
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '17h05', '10400', '2')"
+
     };
 
     public InsertTuples() {
