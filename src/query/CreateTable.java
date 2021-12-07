@@ -6,8 +6,8 @@ import java.util.Calendar;
 public class CreateTable {
     // Pour se connecter à la base de données :
     static final String CONN_URL = "jdbc:oracle:thin:@oracle1.ensimag.fr:1521:oracle1";
-    static final String USER = "guiziova";
-    static final String PASSWD = "guiziova";
+    static final String USER = "arvyp";
+    static final String PASSWD = "arvyp";
 
     // Assure que les tables n'existes pas:
     static final String DROP_PRODUITS = "DROP TABLE PRODUITS";
