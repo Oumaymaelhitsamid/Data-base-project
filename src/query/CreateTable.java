@@ -46,8 +46,8 @@ public class CreateTable {
     static final String CREATE_APOURMERE = "CREATE TABLE aPourMere(nomCategorieFille char(30) PRIMARY KEY," +
             "nomCategorieMere char(30))";
     static final String CREATE_ESTREMPORTEPAR = "CREATE TABLE estRemportePar(idProduit INT," +
-            "dateOffre varchar(8)," +
-            "heureOffre varchar(6))";
+            "dateOffre varchar(10)," +
+            "heureOffre varchar(20))";
 
     private static int N = 8;
     private String[] DROP_TABLES = new String[]{DROP_PRODUITS, DROP_CATEGORIES, DROP_OFFRES, DROP_UTILISATEURS,
