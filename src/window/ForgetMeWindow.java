@@ -84,6 +84,8 @@ public class ForgetMeWindow extends JFrame {
                 conn.close();
 
                 dispose();
+                FirstWindow retour = new FirstWindow(NUMBER_OF_OFFER);
+                retour.setVisible(true);
 
 
             } catch (SQLException er) {

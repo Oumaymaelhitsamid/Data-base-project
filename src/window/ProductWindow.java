@@ -116,7 +116,7 @@ public class ProductWindow extends JFrame{
                 carac.setForeground(Color.BLACK);
                 carac.setBackground(Color.CYAN);
                 carac.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                carac.setBounds(10 + position * 100, 210, 200, 40);
+                carac.setBounds(10, 210 + 50*position/2, 200, 40);
                 contentPane.add(carac);
                 position = position + 1;
             }
@@ -171,7 +171,7 @@ public class ProductWindow extends JFrame{
                         info.setVisible(true);
                         conn.rollback();
                     }
-                    else if(rset_verif2.next() && Integer.parseInt(rset_verif2.getString(1)) >= Integer.parseInt(priceProposed)){
+                    else if(rset_verif2.next() && Float.parseFloat(rset_verif2.getString(1)) >= Float.parseFloat(priceProposed)){
                         PopUp info2 = new PopUp("Le montant de votre proposition doit être plus haut que la dernière proposition");
                         info2.setVisible(true);
                         conn.rollback();
@@ -210,13 +210,13 @@ public class ProductWindow extends JFrame{
                             stmt_insertion2.setString(1, productID);
                             stmt_insertion2.setString(2, date);
                             stmt_insertion2.setString(3, time);
-                            stmt_insertion2.setString(4, priceProposed);
+                            stmt_insertion2.setFloat(4, Float.parseFloat(priceProposed));
                             stmt_insertion2.setString(5, accountID);
                             stmt_insertion2.executeQuery();
                             stmt_insertion2.close();
                             // Update of the current price
                             PreparedStatement stmt_update = conn.prepareStatement("UPDATE PRODUITS SET prixCourant = ? WHERE idProduit = ?");
-                            stmt_update.setString(1, priceProposed);
+                            stmt_update.setFloat(1, Float.parseFloat(priceProposed));
                             stmt_update.setString(2, productID);
                             stmt_update.executeQuery();
                             stmt_update.close();

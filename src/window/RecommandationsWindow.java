@@ -130,7 +130,7 @@ public class RecommandationsWindow extends JFrame{
                 Map.Entry mp = (Map.Entry)i.next();
                 btnNewButton = new JButton(mp.getKey().toString());
                 btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                btnNewButton.setBounds(10 + (150* position ) % 600, 300 + 50 * (position / 4), 140, 40);
+                btnNewButton.setBounds(10 + (140* position ) % 420, 300 + 50 * (position / 3), 140, 40);
                 contentPane.add(btnNewButton);
                 position += 1;
 
@@ -206,7 +206,7 @@ public class RecommandationsWindow extends JFrame{
             for(int i=0; i< categories.size(); i++){
                 btnNewButton = new JButton(categories.get(i));
                 btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                btnNewButton.setBounds(10 + (150* position ) % 600, 50 + 50 * (position / 4), 140, 40);
+                btnNewButton.setBounds(10 + (140* position ) % 420, 50 + 50 * (position / 3), 140, 40);
                 contentPane.add(btnNewButton);
                 position += 1;
 
