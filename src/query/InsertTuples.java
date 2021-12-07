@@ -76,10 +76,10 @@ public class InsertTuples {
             "INSERT INTO CARACTERISTIQUES VALUES ('8', 'Puisssance', '1001 ch')",
             "INSERT INTO CARACTERISTIQUES VALUES ('8', 'Puisssance fiscale', '119 CV')",
             
-            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '15h34', '10100', '1')",
-            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '20h56', '10250', '2')",
-            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '9h18', '10325', '3')",
-            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '17h05', '10400', '2')"
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '15:34:45.087845637', '10100', '1')",
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '20:56:12.015841236', '10250', '2')",
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '09:18:05.120474478', '10325', '3')",
+            "INSERT INTO OFFRES VALUES ('6', '05/12/2021', '17:05:24.987421214', '10400', '2')"
 
     };
 
