@@ -1,33 +1,23 @@
 
 INSERT INTO CATEGORIES VALUES ('Livre');
-
 INSERT INTO CATEGORIES VALUES ('BD');
-
 INSERT INTO CATEGORIES VALUES ('Roman');
-
 INSERT INTO CATEGORIES VALUES ('Console');
-
 INSERT INTO CATEGORIES VALUES ('Voiture');
-
 INSERT INTO CATEGORIES VALUES ('Voiture de sport');
-
 INSERT INTO CATEGORIES VALUES ('Bugatti');
 
 
 
 INSERT INTO APOURMERE VALUES ('BD', 'Livre');
-
 INSERT INTO APOURMERE VALUES ('Roman', 'Livre');
-
 INSERT INTO APOURMERE VALUES ('Bugatti', 'Voiture de sport');
-
 INSERT INTO APOURMERE VALUES ('Voiture de sport', 'Voiture');
 
 
 
 
-INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console sortie en 2005, vendu plus de 25 millions de fois en Europe', 'https://www.cdiscount.com/pdt2/8/5/9/1/700x700/0882224035859/rw/console-xbox-360-premium.jpg',
-'Console');
+INSERT INTO PRODUITS VALUES ('1', 'XBOX 360', '250', 'console sortie en 2005, vendu plus de 25 millions de fois en Europe', 'https://www.cdiscount.com/pdt2/8/5/9/1/700x700/0882224035859/rw/console-xbox-360-premium.jpg', 'Console');
 
 INSERT INTO PRODUITS VALUES ('2', 'Playstation 5', '300', 'console sortie en 2020 par Sony Interactive Entertainement', 'https://www.journaldugeek.com/content/uploads/2021/09/template-jdg-2021-09-14t154227-127.jpg', 'Console');
 
@@ -40,8 +30,10 @@ INSERT INTO PRODUITS VALUES ('5', 'Tintin au Congo', '15', 'Tintin voyage au Con
 
 INSERT INTO PRODUITS VALUES ('6', 'Peugeot 208', '10 000', 'Peugeot occasion, en bonne état, 50 000km', 'https://lh3.googleusercontent.com/proxy/DX4b2G8nfGvU8GEUPs0OCke5iFACCdpci5Og-wF3gdcOkRHuNAECZJjkHgi63mRXYgpQYAgVxt0QNT_iHXm-yGbD5UAO3A4V33wUFVYxUcN4VNSd4WqSaywt', 'Voiture');
 
+INSERT INTO PRODUITS VALUES ('7', 'Renault CLio 4', '11 000', 'Clio occasion, en bonne état, 30 000km', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQi2KQfuis52hoVFykNZv5nFfrm4hYa_aVeA&usqp=CAU', 'Voiture');
 
-INSERT INTO PRODUITS VALUES ('7', 'Bugatti veyron', '2 500 000', 'Occasion en parfaite état, 13000km', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7tffHD0biW0BKbiEZw_P3Xl-Wcy3EKlssOg&usqp=CAU', 'Bugatti');
+
+INSERT INTO PRODUITS VALUES ('8', 'Bugatti veyron', '2 500 000', 'Occasion en parfaite état, 13000km', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7tffHD0biW0BKbiEZw_P3Xl-Wcy3EKlssOg&usqp=CAU', 'Bugatti');
 
 
 
@@ -49,7 +41,7 @@ INSERT INTO PRODUITS VALUES ('7', 'Bugatti veyron', '2 500 000', 'Occasion en pa
 
 INSERT INTO CARACTERISTIQUES VALUES ('1', 'poids', '6 Kg');
 
-INSERT INTO CARACTERISTIQUES VALUES ('2', 'couleur', 'noir');
+INSERT INTO CARACTERISTIQUES VALUES ('1', 'couleur', 'noir');
 
 INSERT INTO CARACTERISTIQUES VALUES ('2', 'poids', '4 Kg');
 
@@ -71,19 +63,26 @@ INSERT INTO CARACTERISTIQUES VALUES ('6', 'Puisssance', '100 ch');
 
 INSERT INTO CARACTERISTIQUES VALUES ('6', 'Puisssance fiscale', '5 CV');
 
+INSERT INTO CARACTERISTIQUES VALUES ('7', 'Puisssance', '90 ch');
+
+INSERT INTO CARACTERISTIQUES VALUES ('7', 'Puisssance fiscale', '5 CV');
+
+INSERT INTO CARACTERISTIQUES VALUES ('8', 'Puisssance', '1001 ch');
+
+INSERT INTO CARACTERISTIQUES VALUES ('8', 'Puisssance fiscale', '119 CV');
 
 
 
 
-INSERT INTO COMPTES VALUES ('1', 'alanfoiré@gmail.com', 'alanfoiré', 'foiré', 'alan', '2 rue Belgrade Belgique');
+INSERT INTO COMPTES VALUES ('1', 'micheldupont@gmail.com', 'micheldupont', 'dupont', 'michel', '2 rue Belgrade Belgique');
 
-INSERT INTO COMPTES VALUES ('2', 'loriefice@gmail.com', 'loriefice', 'fice', 'lorie', '2 rue Marcel Pagnol Grenoble');
+INSERT INTO COMPTES VALUES ('2', 'lauriepetit@gmail.com', 'lauriepetit', 'petit', 'laurie', '2 rue Marcel Pagnol Grenoble');
 
-INSERT INTO COMPTES VALUES ('3', 'ottograf@grenoble-inp.org', 'ottograf', 'graf', 'otto', '7 rue de la Paix Paris');
+INSERT INTO COMPTES VALUES ('3', 'philippedubois@grenoble-inp.org', 'philippedubois', 'dubois', 'philippe', '7 rue de la Paix Paris');
 
-INSERT INTO COMPTES VALUES ('4', 'clairehyere@gmail.com', 'clairehyere', 'hyere', 'claire', '9 Avenue de Valmy');
+INSERT INTO COMPTES VALUES ('4', 'clairelefevre@gmail.com', 'clairelefevre', 'lefevre', 'claire', '9 Avenue de Valmy');
 
-INSERT INTO COMPTES VALUES ('5', 'marierouana@gmail.com', 'marierouana', 'dassault', 'richard', '13 Rue Arago');
+INSERT INTO COMPTES VALUES ('5', 'richardleroy@gmail.com', 'richardleroy', 'leroy', 'richard', '13 Rue Arago');
 
 
 
