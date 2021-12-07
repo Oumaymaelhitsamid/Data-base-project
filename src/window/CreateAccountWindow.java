@@ -145,7 +145,8 @@ public class CreateAccountWindow extends JFrame{
                 String password = passwordField1.getText();
                 String confirm = passwordField2.getText();
                 if (password.length() <= 7){
-                    System.out.println("The length of the password must be > 7");
+                    PopUp info = new PopUp("The length of the password must be > 7");
+                    info.setVisible(true);
                 }
                 else if (password.equals(confirm) && emailField.getText().length() != 0 && nameField.getText().length() != 0
                     && surnameField.getText().length() != 0 && adresseField.getText().length() != 0){

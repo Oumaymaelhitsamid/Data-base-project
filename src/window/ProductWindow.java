@@ -166,10 +166,12 @@ public class ProductWindow extends JFrame{
                     ResultSet rset_verif2 = stmt_verif2.executeQuery();
 
                     if(rset_verif1.next() && rset_verif1.getString(1).equals(accountID)){
-                        System.out.println("Last proposition is already yours.");
+                        PopUp info = new PopUp("La dernière enchère pour ce produit est déjà la votre.");
+                        info.setVisible(true);
                     }
                     else if(rset_verif2.next() && Integer.parseInt(rset_verif2.getString(1)) >= Integer.parseInt(priceProposed)){
-                        System.out.println("Your proposition must be higher than the previous one.");
+                        PopUp info2 = new PopUp("Le montant de votre proposition doit être plus haut que la dernière proposition");
+                        info2.setVisible(true);
                     }
                     else{
                         // Verify if the product is already bought
@@ -194,6 +196,8 @@ public class ProductWindow extends JFrame{
                                     stmt_insertion.executeQuery();
                                     stmt_insertion.close();
                                     conn.commit();
+                                    PopUp victory = new PopUp("Bravo, vous avez remporté ce produit !");
+                                    victory.setVisible(true);
                                 }
                             }
                             stmt_interrogation2.close();
@@ -216,7 +220,8 @@ public class ProductWindow extends JFrame{
 
 
                             conn.commit();
-                            System.out.println("Your proposition is accepted");
+                            PopUp infoEnchere = new PopUp("Votre enchere a bien été acceptée");
+                            infoEnchere.setVisible(true);
                             dispose();
                             ProductWindow frame = new ProductWindow(accountID, productID, NUMBER_OF_OFFER);
                             frame.setVisible(true);
