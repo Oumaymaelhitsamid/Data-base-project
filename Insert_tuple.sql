@@ -37,7 +37,7 @@ INSERT INTO PRODUITS VALUES ('4', 'Guerre et Paix Partie 2', '12', 'Livre de Tol
 INSERT INTO PRODUITS VALUES ('5', 'Tintin au Congo', '15', 'Tintin voyage au Congo pour lutter contre des gangsters', 'https://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Visual_Principal_340/5/1/0/9782203001015/tsp20120926112403/Tintin-au-Congo.jpg', 'BD');
 
 
-INSERT INTO PRODUITS VALUES ('6', 'Peugeot 208', '10000', 'Peugeot occasion, en bonne état, 50 000km', 'https://lh3.googleusercontent.com/proxy/DX4b2G8nfGvU8GEUPs0OCke5iFACCdpci5Og-wF3gdcOkRHuNAECZJjkHgi63mRXYgpQYAgVxt0QNT_iHXm-yGbD5UAO3A4V33wUFVYxUcN4VNSd4WqSaywt', 'Voiture');
+INSERT INTO PRODUITS VALUES ('6', 'Peugeot 208', '10400', 'Peugeot occasion, en bonne état, 50 000km', 'https://lh3.googleusercontent.com/proxy/DX4b2G8nfGvU8GEUPs0OCke5iFACCdpci5Og-wF3gdcOkRHuNAECZJjkHgi63mRXYgpQYAgVxt0QNT_iHXm-yGbD5UAO3A4V33wUFVYxUcN4VNSd4WqSaywt', 'Voiture');
 
 INSERT INTO PRODUITS VALUES ('7', 'Renault CLio 4', '11000', 'Clio occasion, en bonne état, 30 000km', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQi2KQfuis52hoVFykNZv5nFfrm4hYa_aVeA&usqp=CAU', 'Voiture');
 
