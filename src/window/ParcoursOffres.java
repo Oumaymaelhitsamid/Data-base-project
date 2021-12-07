@@ -75,7 +75,7 @@ public class ParcoursOffres extends JFrame {
         for (String result : results) {
             btnNewButton = new JButton(result);
             btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-            btnNewButton.setBounds(10 + (140 * position) % 600, 50 + 40 * (position / 4), 135, 40);
+            btnNewButton.setBounds(10 + (140 * position) % 420, 50 + 60 * (position / 3), 135, 40);
             contentPane.add(btnNewButton);
             position += 1;
 
